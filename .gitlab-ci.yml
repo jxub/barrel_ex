@@ -2,6 +2,8 @@ image: elixir:latest
 
 before_script:
   - mix format
+  - yes | mix local.hex
+  - mix install
   - mix deps.update --all
   - mix deps.get
 
