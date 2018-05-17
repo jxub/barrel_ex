@@ -3,6 +3,7 @@ image:
 
 before_script:
   - mix format
+  - mix deps.update
   - mix deps.get
 
 mix:
