@@ -17,6 +17,7 @@ defmodule DocumentTest do
     %{db: db}
   end
 
+  @tag :skip
   test "creates many documents", %{db: db} do
     for n <- 1..20 do
       doc = Map.new([id: :rand.uniform(10000), number: n, dummy: "a string"])
@@ -24,6 +25,7 @@ defmodule DocumentTest do
     end
   end
 
+  @tag :skip
   test "deletes all documents", %{db: db} do
     {:ok, docs} = Database.get(db)
   end
