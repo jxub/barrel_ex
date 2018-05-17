@@ -1,5 +1,4 @@
-image:
-  - elixir:latest
+image: elixir:latest
 
 before_script:
   - mix format
