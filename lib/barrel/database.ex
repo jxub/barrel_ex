@@ -1,44 +1,71 @@
 defmodule BarrelEx.Database do
   alias BarrelEx.Request
 
-  # TODO: utils to do url join independently of `/`
+  ## GET
 
-  @database_url "dbs/"
-  @database_id "database_id"
-
+  @spec get(none()) :: {atom(), map}
   def get do
-    Request.get(@database_url)
+    make_url()
+    |> Request.get()
   end
 
+  @spec get(none()) :: map
   def get! do
-    Request.get!(@database_url)
+    make_url()
+    |> Request.get!()
   end
 
+  @spec get(String.t) :: {atom(), map}
   def get(db) do
-    Request.get(@database_url <> db)
+    make_url(db)
+    |> Request.get()
   end
 
+  @spec get(String.t) :: map
   def get!(db) do
-    Request.get!(@database_url <> db)
+    make_url(db)
+    |> Request.get!()
   end
 
+  ## CREATE
+
+  @spec create(String.t)  :: {atom(), map}
   def create(db) do
-    body = %{@database_id => db}
-
-    Request.post(@database_url, body)
+    with url = make_url(),
+         db = Map.new(["database_id": db]) do
+      Request.post(url, db)
+    end
   end
 
+  @spec create!(String.t)  :: map
   def create!(db) do
-    body = %{@database_id => db}
-
-    Request.post!(@database_url, body)
+    with url = make_url(),
+         db = Map.new(["database_id": db]) do
+      Request.post!(url, db)
+    end
   end
 
+  ## DELETE
+
+  @spec delete(String.t)  :: {atom(), map}
   def delete(db) do
-    Request.delete(@database_url <> db)
+    make_url(db)
+    |> Request.delete() 
   end
 
+  @spec delete!(String.t)  :: map
   def delete!(db) do
-    Request.delete!(@database_url <> db)
+    make_url(db)
+    |> Request.delete!()
+  end
+
+  ## UTILS
+
+  defp make_url do
+    "dbs/"
+  end
+
+  defp make_url(db) do
+    make_url() <> db
   end
 end
