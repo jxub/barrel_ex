@@ -3,7 +3,6 @@ image: elixir:latest
 before_script:
   - mix format
   - mix local.hex --force
-  - mix install
   - mix deps.update --all
   - mix deps.get
 
