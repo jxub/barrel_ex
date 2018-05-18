@@ -48,5 +48,4 @@ defmodule BarrelEx.Request do
   defp atomize(k, v) when is_list(v) do
     {atomize(k), v}
   end
-
 end
