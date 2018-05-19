@@ -15,6 +15,7 @@ defmodule BarrelEx do
       with {:ok, db} = Database.get(db) do
         Map.new([id: "1234", name: "Jakub", surname: "Janarek"])
         |> Document.create!(db)
+      end
     end
   end
   """
