@@ -32,7 +32,8 @@ defmodule BarrelEx.MixProject do
       {:poison, "~> 3.1.0"},
       {:morphix, "~> 0.3.0"},
       {:credo, "~> 0.8", only: [:dev, :test]},
-      {:excoveralls, "~> 0.8", only: :test}
+      {:excoveralls, "~> 0.8", only: :test},
+      {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
     ]
