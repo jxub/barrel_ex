@@ -11,12 +11,12 @@ defmodule BarrelEx.Request do
   end
 
   def process_request_body(body) do
-    Poison.encode!(body)
+    Jason.encode!(body)
   end
 
   def process_response_body(body) do
     body
-    |> Poison.decode!()
+    |> Jason.decode!()
     |> atomize!()
   end
 

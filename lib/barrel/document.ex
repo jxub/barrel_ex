@@ -75,7 +75,7 @@ defmodule BarrelEx.Document do
 
   ## GET - ONE DOCUMENT OPTIONS
 
-  # TODO: @spec get(String.t(), String.t(), bool
+  # TODO: @spec get(String.t(), String.t(), bool)
 
   ## CREATE
 
