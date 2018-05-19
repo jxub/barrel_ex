@@ -20,11 +20,11 @@ defmodule BarrelEx.Request do
     |> atomize!()
   end
 
-  defp atomize!(body) when is_list(body) do
-    body
-  end
-
   defp atomize!(body) when is_map(body) do
     Morphix.atomorphiform!(body)
+  end
+
+  defp atomize!(body) do
+    body
   end
 end
