@@ -1,7 +1,13 @@
 defmodule BarrelEx.Document do
+  @moduledoc """
+  API for interacting with a BarrelDB document.
+  """
   alias BarrelEx.Request
 
-  ## GET
+  ## TODO: some header args like x-barrel-id-match and ETag
+  ## are in headers, accept them too
+
+  ## GET - ALL DOCUMENTS SIMPLE
 
   @spec get(String.t()) :: {atom(), map}
   def get(db) do
@@ -10,12 +16,14 @@ defmodule BarrelEx.Document do
     |> Request.get()
   end
 
-  @spec get(String.t()) :: map
+  @spec get!(String.t()) :: map
   def get!(db) do
     db
     |> make_url()
     |> Request.get!()
   end
+
+  ## GET - ALL DOCUMENTS OPTIONS
 
   @spec get(String.t(), list()) :: {atom(), map}
   def get(db, options) when is_list(options) do
@@ -31,19 +39,39 @@ defmodule BarrelEx.Document do
     |> get(db)
   end
 
-  @spec get(String.t(), list()) :: map
+  @spec get!(String.t(), list()) :: map
   def get!(db, options) when is_list(options) do
     with url = make_url(db) do
       Request.get!(url, [], params: options)
     end
   end
 
-  @spec get(String.t(), map) :: map
+  @spec get!(String.t(), map) :: map
   def get!(db, options) when is_map(options) do
     Map.to_list(options)
     |> atomize_keys()
     |> get!(db)
   end
+
+  ## GET - ONE DOCUMENT SIMPLE
+
+  @spec get(String.t(), String.t()) :: {atom(), map}
+  def get(db, doc_id) do
+    with url = make_url(db, doc_id) do
+      Request.get(url)
+    end
+  end
+
+  @spec get!(String.t(), String.t()) :: {atom(), map}
+  def get!(db, doc_id) do
+    with url = make_url(db, doc_id) do
+      Request.get!(url)
+    end
+  end
+
+  ## GET - ONE DOCUMENT OPTIONS
+
+  # @spec get(String.t(), String.t(), bool
 
   ## CREATE
 
@@ -65,8 +93,9 @@ defmodule BarrelEx.Document do
 
   @spec delete(String.t(), map) :: {atom(), map}
   def delete(db, doc) when is_map(doc) do
-    Map.fetch!(doc, "id")
-    |> delete(db)
+    with doc = Map.fetch!(doc, "id") do
+      delete(db, doc)
+    end
   end
 
   @spec delete(String.t(), String.t()) :: {atom(), map}
@@ -78,8 +107,9 @@ defmodule BarrelEx.Document do
 
   @spec delete!(String.t(), map) :: {atom(), map}
   def delete!(db, doc) when is_map(doc) do
-    Map.fetch!(doc, "id")
-    |> delete!(db)
+    with doc = Map.fetch!(doc, "id") do
+      delete!(db, doc)
+    end
   end
 
   @spec delete!(String.t(), String.t()) :: {atom(), map}
