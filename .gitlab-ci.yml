@@ -19,9 +19,3 @@ mix:
   - mix credo
   - mix coveralls
   - mix test
-
-after_script:
-  - cd ../barrel-platform
-  - ./_build/prod/rel/barrel/bin/barrel stop
-  - cd ../barrel_ex
-
