@@ -10,9 +10,8 @@ before_script:
   - git clone https://gitlab.com/barrel-db/barrel-platform.git
   - cd barrel-platform
   - make rel
-  - ./_build/default/rel/barrel/bin/barrel start
-  - cd ..
-  - cd barrel_ex
+  - ./_build/prod/rel/barrel/bin/barrel start
+  - cd ../barrel_ex
 
 mix:
   script:
@@ -20,3 +19,9 @@ mix:
   - mix credo
   - mix coveralls
   - mix test
+
+after_script:
+  - cd ../barrel-platform
+  - ./_build/prod/rel/barrel/bin/barrel stop
+  - cd ../barrel_ex
+
