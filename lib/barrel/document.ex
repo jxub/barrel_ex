@@ -34,9 +34,11 @@ defmodule BarrelEx.Document do
 
   @spec get(String.t(), map) :: {atom(), map}
   def get(db, options) when is_map(options) do
-    Map.to_list(options)
-    |> atomize_keys()
-    |> get(db)
+    with options = Map.to_list(options) do
+      options
+      |> atomize_keys()
+      |> get(db)
+    end
   end
 
   @spec get!(String.t(), list()) :: map
@@ -48,9 +50,11 @@ defmodule BarrelEx.Document do
 
   @spec get!(String.t(), map) :: map
   def get!(db, options) when is_map(options) do
-    Map.to_list(options)
-    |> atomize_keys()
-    |> get!(db)
+    with options = Map.to_list(options) do
+      options
+      |> atomize_keys()
+      |> get!(db)
+    end
   end
 
   ## GET - ONE DOCUMENT SIMPLE
@@ -71,7 +75,7 @@ defmodule BarrelEx.Document do
 
   ## GET - ONE DOCUMENT OPTIONS
 
-  # @spec get(String.t(), String.t(), bool
+  # TODO: @spec get(String.t(), String.t(), bool
 
   ## CREATE
 

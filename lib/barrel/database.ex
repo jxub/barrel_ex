@@ -8,26 +8,30 @@ defmodule BarrelEx.Database do
 
   @spec get(none()) :: {atom(), map}
   def get do
-    make_url()
-    |> Request.get()
+    with url = make_url() do
+      Request.get(url)
+    end
   end
 
   @spec get(none()) :: map
   def get! do
-    make_url()
-    |> Request.get!()
+    with url = make_url() do
+      Request.get!(url)
+    end
   end
 
   @spec get(String.t()) :: {atom(), map}
   def get(db) do
-    make_url(db)
-    |> Request.get()
+    with url = make_url(db) do
+      Request.get(url)
+    end
   end
 
   @spec get(String.t()) :: map
   def get!(db) do
-    make_url(db)
-    |> Request.get!()
+    with url = make_url(db) do
+      Request.get!(url)
+    end
   end
 
   ## CREATE
@@ -52,14 +56,16 @@ defmodule BarrelEx.Database do
 
   @spec delete(String.t()) :: {atom(), map}
   def delete(db) do
-    make_url(db)
-    |> Request.delete()
+    with url = make_url(db) do
+      Request.delete(url)
+    end
   end
 
   @spec delete!(String.t()) :: map
   def delete!(db) do
-    make_url(db)
-    |> Request.delete!()
+    with url = make_url(db) do
+      Request.delete!(url)
+    end
   end
 
   ## UTILS
