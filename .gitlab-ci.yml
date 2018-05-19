@@ -4,9 +4,8 @@ before_script:
   - mix format
   - mix local.rebar --force
   - mix local.hex --force
-  - mix deps.update --all
   - mix deps.get
 
 mix:
   script:
-  - mix # test
+  - mix # test # TODO: uncomment and pass tests
