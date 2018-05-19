@@ -6,12 +6,10 @@ Bindings directly to Erlang are pending to be done at the moment.
 
 ## Usage
 
-To use the latest version, paste in mix.exs the following line in deps:
+To use the latest version, paste the following line in mix.exs deps:
 
 ```elixir
-
 {:barrel_ex,  git: "https://gitlab.com/barrel-db/Clients/barrel_ex", branch: "develop"}
-
 ```
 And use in a module as you wish:
 
@@ -20,7 +18,7 @@ defmodule MyModule do
   
   alias BarrelEx.{
     Database,
-    Database.Document
+    Document
   }
   
   def myfun do
@@ -29,5 +27,4 @@ defmodule MyModule do
       |> Document.create!(db)
   end
 end
-
 ```
