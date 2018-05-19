@@ -29,7 +29,6 @@ defmodule BarrelEx.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.1.0"},
-      # {:poison, "~> 3.1.0"},
       {:jason, "~> 1.0"},
       {:morphix, "~> 0.3.0"},
       {:credo, "~> 0.8", only: [:dev, :test]},
