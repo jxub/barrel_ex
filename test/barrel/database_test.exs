@@ -22,10 +22,10 @@ defmodule DatabaseTest do
 
   test "duplicated database deletion and creation", %{db2: db2} do
     {:ok, resp} = Database.delete(db2)
-    assert true == resp.body["ok"]
+    assert %{ok: true} == resp.body
     {:ok, data} = Database.create(db2)
     {:ok, data2} = Database.create(db2)
-    assert "db exists" == data2.body["message"]
+    assert %{"message": "db exists"} == data2.body
     assert 409 == data2.status_code
   end
 end
