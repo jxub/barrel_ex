@@ -1,4 +1,7 @@
 defmodule BarrelEx.Request do
+  @moduledoc """
+  Posion wrapper customization.
+  """
   use HTTPoison.Base
 
   @endpoint Application.get_env(:barrel_ex, :database_url)
@@ -14,6 +17,7 @@ defmodule BarrelEx.Request do
   def process_response_body(body) do
     body
     |> Poison.decode!()
+
     # |> atomize()
   end
 
