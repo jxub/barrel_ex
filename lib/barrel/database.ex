@@ -1,4 +1,7 @@
 defmodule BarrelEx.Database do
+  @moduledoc """
+  API for interacting with a BarrelDB database.
+  """
   alias BarrelEx.Request
 
   ## GET
@@ -15,13 +18,13 @@ defmodule BarrelEx.Database do
     |> Request.get!()
   end
 
-  @spec get(String.t) :: {atom(), map}
+  @spec get(String.t()) :: {atom(), map}
   def get(db) do
     make_url(db)
     |> Request.get()
   end
 
-  @spec get(String.t) :: map
+  @spec get(String.t()) :: map
   def get!(db) do
     make_url(db)
     |> Request.get!()
@@ -29,31 +32,31 @@ defmodule BarrelEx.Database do
 
   ## CREATE
 
-  @spec create(String.t)  :: {atom(), map}
+  @spec create(String.t()) :: {atom(), map}
   def create(db) do
     with url = make_url(),
-         db = Map.new(["database_id": db]) do
+         db = Map.new(database_id: db) do
       Request.post(url, db)
     end
   end
 
-  @spec create!(String.t)  :: map
+  @spec create!(String.t()) :: map
   def create!(db) do
     with url = make_url(),
-         db = Map.new(["database_id": db]) do
+         db = Map.new(database_id: db) do
       Request.post!(url, db)
     end
   end
 
   ## DELETE
 
-  @spec delete(String.t)  :: {atom(), map}
+  @spec delete(String.t()) :: {atom(), map}
   def delete(db) do
     make_url(db)
-    |> Request.delete() 
+    |> Request.delete()
   end
 
-  @spec delete!(String.t)  :: map
+  @spec delete!(String.t()) :: map
   def delete!(db) do
     make_url(db)
     |> Request.delete!()
