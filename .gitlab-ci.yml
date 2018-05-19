@@ -1,11 +1,22 @@
 image: elixir:latest
 
 before_script:
-  - mix format
+  - apt-get update -y
+  - apt-get install make -y
   - mix local.rebar --force
   - mix local.hex --force
   - mix deps.get
+  - cd ..
+  - git clone https://gitlab.com/barrel-db/barrel-platform.git
+  - cd barrel-platform
+  - make rel
+  - ./_build/default/rel/barrel/bin/barrel start
+  - cd ..
+  - cd barrel_ex
 
 mix:
   script:
-  - mix # test # TODO: uncomment and pass tests
+  - mix format
+  - mix credo
+  - mix coveralls
+  - mix test
