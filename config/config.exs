@@ -23,7 +23,8 @@ use Mix.Config
 
 config :barrel_ex,
   database_url: "http://localhost:7080/",
-  database_port: 7080 # unused, too hard to format
+  # unused, too hard to format
+  database_port: 7080
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
