@@ -1,4 +1,4 @@
-defmodule Sysdoc do
+defmodule BarrelEx.Sysdoc do
   @moduledoc """
   Utilities for working with system documents.
   Usually not to be used.
@@ -33,7 +33,7 @@ defmodule Sysdoc do
       Request.put!(url)
     end
   end
-  
+
   defp make_url(db, doc_id) when is_bitstring(doc_id) do
     "dbs/" <> db <> "/system/" <> doc_id
   end

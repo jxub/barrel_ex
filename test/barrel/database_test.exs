@@ -25,7 +25,7 @@ defmodule DatabaseTest do
     assert %{ok: true} == resp.body
     {:ok, _data} = Database.create(db2)
     {:ok, data2} = Database.create(db2)
-    assert %{"message": "db exists"} == data2.body
+    assert %{message: "db exists"} == data2.body
     assert 409 == data2.status_code
   end
 end
