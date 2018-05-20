@@ -9,14 +9,14 @@ defmodule BarrelEx.Document do
 
   ## GET - ALL DOCUMENTS SIMPLE
 
-  @spec get(String.t()) :: {atom(), map}
+  @spec get(String.t()) :: {atom(), map()}
   def get(db) do
     db
     |> make_url()
     |> Request.get()
   end
 
-  @spec get!(String.t()) :: map
+  @spec get!(String.t()) :: map()
   def get!(db) do
     db
     |> make_url()
@@ -25,14 +25,14 @@ defmodule BarrelEx.Document do
 
   ## GET - ALL DOCUMENTS OPTIONS
 
-  @spec get(String.t(), list()) :: {atom(), map}
+  @spec get(String.t(), list()) :: {atom(), map()}
   def get(db, options) when is_list(options) do
     with url = make_url(db) do
       Request.get(url, [], params: options)
     end
   end
 
-  @spec get(String.t(), map) :: {atom(), map}
+  @spec get(String.t(), map()) :: {atom(), map()}
   def get(db, options) when is_map(options) do
     with options = Map.to_list(options) do
       options
@@ -41,14 +41,14 @@ defmodule BarrelEx.Document do
     end
   end
 
-  @spec get!(String.t(), list()) :: map
+  @spec get!(String.t(), list()) :: map()
   def get!(db, options) when is_list(options) do
     with url = make_url(db) do
       Request.get!(url, [], params: options)
     end
   end
 
-  @spec get!(String.t(), map) :: map
+  @spec get!(String.t(), map()) :: map()
   def get!(db, options) when is_map(options) do
     with options = Map.to_list(options) do
       options
@@ -59,14 +59,14 @@ defmodule BarrelEx.Document do
 
   ## GET - ONE DOCUMENT SIMPLE
 
-  @spec get(String.t(), String.t()) :: {atom(), map}
+  @spec get(String.t(), String.t()) :: {atom(), map()}
   def get(db, doc_id) do
     with url = make_url(db, doc_id) do
       Request.get(url)
     end
   end
 
-  @spec get!(String.t(), String.t()) :: {atom(), map}
+  @spec get!(String.t(), String.t()) :: {atom(), map()}
   def get!(db, doc_id) do
     with url = make_url(db, doc_id) do
       Request.get!(url)
@@ -79,14 +79,14 @@ defmodule BarrelEx.Document do
 
   ## CREATE
 
-  @spec create(String.t(), map | none()) :: {atom(), map}
+  @spec create(String.t(), map() | none()) :: {atom(), map()}
   def create(db, doc \\ %{}) do
     with url = make_url(db) do
       Request.post(url, doc)
     end
   end
 
-  @spec create!(String.t(), map | none()) :: map
+  @spec create!(String.t(), map() | none()) :: map()
   def create!(db, doc \\ %{}) do
     with url = make_url(db) do
       Request.post!(url, doc)
@@ -95,28 +95,28 @@ defmodule BarrelEx.Document do
 
   ## DELETE
 
-  @spec delete(String.t(), map) :: {atom(), map}
+  @spec delete(String.t(), map()) :: {atom(), map()}
   def delete(db, doc) when is_map(doc) do
     with doc = Map.fetch!(doc, "id") do
       delete(db, doc)
     end
   end
 
-  @spec delete(String.t(), String.t()) :: {atom(), map}
+  @spec delete(String.t(), String.t()) :: {atom(), map()}
   def delete(db, doc_id) do
     with url = make_url(db, doc_id) do
       Request.delete(url)
     end
   end
 
-  @spec delete!(String.t(), map) :: {atom(), map}
+  @spec delete!(String.t(), map()) :: {atom(), map()}
   def delete!(db, doc) when is_map(doc) do
     with doc = Map.fetch!(doc, "id") do
       delete!(db, doc)
     end
   end
 
-  @spec delete!(String.t(), String.t()) :: {atom(), map}
+  @spec delete!(String.t(), String.t()) :: {atom(), map()}
   def delete!(db, doc_id) do
     with url = make_url(db, doc_id) do
       Request.delete!(url)
