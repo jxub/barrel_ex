@@ -11,9 +11,9 @@ defmodule BarrelEx.Server do
   and the URI location of the API doc alongside
   the request status.
   """
-  @spec info(none()) :: {atom(), map()}
+  @spec info() :: {atom(), map()}
   def info do
-    Request.get()
+    Request.get("/")
   end
 
   @doc """
@@ -21,16 +21,16 @@ defmodule BarrelEx.Server do
   the description of the Barrel-db application
   and the URI location of the API doc.
   """
-  @spec info!(none()) :: map
+  @spec info!() :: map
   def info! do
-    Request.get!()
+    Request.get!("/")
   end
 
   @doc """
   Returns a new K-Ordered 16-bytes object ID and
   the request status.
   """
-  @spec ids(none()) :: {atom(), map()}
+  @spec ids() :: {atom(), map()}
   def ids do
     Request.get("/ids")
   end
@@ -38,7 +38,7 @@ defmodule BarrelEx.Server do
   @doc """
   Returns a new K-Ordered 16-bytes object ID.
   """
-  @spec ids!(none()) :: map
+  @spec ids!() :: map
   def ids! do
     Request.get!("/ids")
   end
