@@ -5,7 +5,7 @@ defmodule BarrelEx do
   Usage:
 
   defmodule MyModule do
-  
+
     alias BarrelEx.{
       Database,
       Document
