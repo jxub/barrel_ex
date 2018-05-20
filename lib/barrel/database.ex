@@ -55,22 +55,10 @@ defmodule BarrelEx.Database do
   `db_id`. Returns the database info and response status.
   """
   @spec create(String.t()) :: {atom(), map()}
-  def create(db_id) do
+  def create(db_id) when is_bitstring(db_id) do
     with url = make_url(),
          db = Map.new(database_id: db_id) do
       Request.post(url, db)
-    end
-  end
-
-  @doc """
-  Create a new database with the database_id
-  `db_id`. Returns database info.
-  """
-  @spec create!(String.t()) :: map()
-  def create!(db) do
-    with url = make_url(),
-         db = Map.new(database_id: db) do
-      Request.post!(url, db)
     end
   end
 
@@ -86,13 +74,25 @@ defmodule BarrelEx.Database do
   end
 
   @doc """
+  Create a new database with the database_id
+  `db_id`. Returns database info.
+  """
+  @spec create!(String.t()) :: map()
+  def create!(db_id) when is_bitstring(db_id) do
+    with url = make_url(),
+         db = Map.new(database_id: db_id) do
+      Request.post!(url, db)
+    end
+  end
+
+  @doc """
   Create a new database with the database configuration
   `db`. Returns database info and response status.
   """
-  @spec create(map()) :: map()
-  def create(db) when is_map(db) do
+  @spec create!(map()) :: map()
+  def create!(db) when is_map(db) do
     with url = make_url() do
-      Request.post(url, db)
+      Request.post!(url, db)
     end
   end
 
