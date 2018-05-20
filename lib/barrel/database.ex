@@ -98,6 +98,9 @@ defmodule BarrelEx.Database do
 
   ## DELETE
 
+  @doc """
+  Delete a database named `db`, returns status and database info.
+  """
   @spec delete(String.t()) :: {atom(), map()}
   def delete(db) do
     with url = make_url(db) do
@@ -105,6 +108,9 @@ defmodule BarrelEx.Database do
     end
   end
 
+  @doc """
+  Delete a database named `db`, returns the database info.
+  """
   @spec delete!(String.t()) :: map()
   def delete!(db) do
     with url = make_url(db) do
