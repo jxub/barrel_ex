@@ -21,7 +21,7 @@ defmodule BarrelEx.Server do
   the description of the Barrel-db application
   and the URI location of the API doc.
   """
-  @spec info!() :: map
+  @spec info!() :: map()
   def info! do
     Request.get!("/")
   end
@@ -38,7 +38,7 @@ defmodule BarrelEx.Server do
   @doc """
   Returns a new K-Ordered 16-bytes object ID.
   """
-  @spec ids!() :: map
+  @spec ids!() :: map()
   def ids! do
     Request.get!("/ids")
   end

@@ -10,7 +10,7 @@ defmodule BarrelEx.Sysdoc do
   @doc """
   Get a system document and the response status.
   """
-  @spec get(String.t(), String.t()) :: {atom(), map}
+  @spec get(String.t(), String.t()) :: {atom(), map()}
   def get(db, doc_id) do
     with url = make_url(db, doc_id) do
       Request.get(url)
@@ -20,7 +20,7 @@ defmodule BarrelEx.Sysdoc do
   @doc """
   Get a system document.
   """
-  @spec get!(String.t(), String.t()) :: map
+  @spec get!(String.t(), String.t()) :: map()
   def get!(db, doc_id) do
     with url = make_url(db, doc_id) do
       Request.get!(url)
@@ -31,7 +31,7 @@ defmodule BarrelEx.Sysdoc do
   Update a system document with returning
   the response status.
   """
-  @spec put(String.t(), String.t()) :: {atom(), map}
+  @spec put(String.t(), String.t()) :: {atom(), map()}
   def put(db, doc_id) do
     with url = make_url(db, doc_id) do
       Request.put(url)
@@ -41,7 +41,7 @@ defmodule BarrelEx.Sysdoc do
   @doc """
   Update a system document.
   """
-  @spec put!(String.t(), String.t()) :: map
+  @spec put!(String.t(), String.t()) :: map()
   def put!(db, doc_id) do
     with url = make_url(db, doc_id) do
       Request.put!(url)
