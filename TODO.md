@@ -1,8 +1,9 @@
 ## PENDING
 
-- get db url from config
-- fix failing tests and CI
-- finish doing recursive atomizer
+- test this modules:
+    - sysdoc
+    - database
+- improve the test coverage in general
 
 
 

@@ -12,7 +12,7 @@ To use the latest version, paste the following line in mix.exs deps:
 {:barrel_ex,  git: "https://gitlab.com/barrel-db/Clients/barrel_ex", branch: "develop"}
 ```
 
-And use in a module as you wish:
+And use as you wish:
 
 ```elixir
 defmodule MyModule do
