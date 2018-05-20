@@ -1,11 +1,15 @@
 defmodule BarrelEx.Sysdoc do
   @moduledoc """
   Utilities for working with system documents.
-  Usually not to be used.
-  TODO: untested (do it?)
+  Usually not to be used, nevertheless I'll
+  expose the API as I don't want to limit
+  the BarrelEx client.
   """
   alias BarrelEx.Request
 
+  @doc """
+  Get a system document and the response status.
+  """
   @spec get(String.t(), String.t()) :: {atom(), map}
   def get(db, doc_id) do
     with url = make_url(db, doc_id) do
@@ -13,6 +17,9 @@ defmodule BarrelEx.Sysdoc do
     end
   end
 
+  @doc """
+  Get a system document.
+  """
   @spec get!(String.t(), String.t()) :: map
   def get!(db, doc_id) do
     with url = make_url(db, doc_id) do
@@ -20,6 +27,10 @@ defmodule BarrelEx.Sysdoc do
     end
   end
 
+  @doc """
+  Update a system document with returning
+  the response status.
+  """
   @spec put(String.t(), String.t()) :: {atom(), map}
   def put(db, doc_id) do
     with url = make_url(db, doc_id) do
@@ -27,6 +38,9 @@ defmodule BarrelEx.Sysdoc do
     end
   end
 
+  @doc """
+  Update a system document.
+  """
   @spec put!(String.t(), String.t()) :: map
   def put!(db, doc_id) do
     with url = make_url(db, doc_id) do
