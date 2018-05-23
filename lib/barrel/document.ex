@@ -23,7 +23,7 @@ defmodule BarrelEx.Document do
     |> Request.get!()
   end
 
-  ## GET - ALL DOCUMENTS OPTIONS
+  ## GET
 
   @spec get(String.t(), list()) :: {atom(), map()}
   def get(db, options) when is_list(options) do
@@ -38,6 +38,13 @@ defmodule BarrelEx.Document do
       options
       |> atomize_keys()
       |> get(db)
+    end
+  end
+
+  @spec get(String.t(), String.t()) :: {atom(), map()}
+  def get(db, doc_id) do
+    with url = make_url(db, doc_id) do
+      Request.get(url)
     end
   end
 
@@ -57,21 +64,14 @@ defmodule BarrelEx.Document do
     end
   end
 
-  ## GET - ONE DOCUMENT SIMPLE
-
-  @spec get(String.t(), String.t()) :: {atom(), map()}
-  def get(db, doc_id) do
-    with url = make_url(db, doc_id) do
-      Request.get(url)
-    end
-  end
-
   @spec get!(String.t(), String.t()) :: {atom(), map()}
   def get!(db, doc_id) do
     with url = make_url(db, doc_id) do
       Request.get!(url)
     end
   end
+
+  ## GET - ONE DOCUMENT SIMPLE
 
   ## GET - ONE DOCUMENT OPTIONS
 

@@ -23,3 +23,15 @@ As using this client is way simpler, see https://gitlab.com/barrel-db/lab/barrel
 - Some sort of rate limiting and routing on the client side (?)
 - GraphQL API (?)
 - Aggregation framework (?)
+
+issue + pr per module: do one today
+
+native integration with barrel_db: namespace not barrel_httpc
+streams barrel: strema he database to make the query
+make sure not to use too much memory
+phoeinx: ecto connector to barrel,
+store branch for barrel
+
+this week:
+finish http connector
+have a look at how things are done in barrel-db:*
