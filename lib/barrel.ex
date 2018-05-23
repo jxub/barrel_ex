@@ -5,11 +5,7 @@ defmodule BarrelEx do
   Usage:
 
   defmodule MyModule do
-
-    alias BarrelEx.{
-      Database,
-      Document
-    }
+    use BarrelEx
     
     def myfun do
       with {:ok, db} = Database.get(db) do
@@ -19,4 +15,15 @@ defmodule BarrelEx do
     end
   end
   """
+  defmacro __using__(_) do
+    quote do
+      alias BarrelEx.{
+        Database,
+        Document,
+        Exception,
+        Server,
+        Sysdoc
+      }
+    end
+  end
 end
