@@ -56,10 +56,8 @@ defmodule BarrelEx.Database do
   """
   @spec create(String.t()) :: {atom(), map()}
   def create(db_id) when is_bitstring(db_id) do
-    with url = make_url(),
-         db = Map.new(database_id: db_id) do
-      Request.post(url, db)
-    end
+    db = Map.new(database_id: db_id)
+    create(db)
   end
 
   @doc """
@@ -79,10 +77,8 @@ defmodule BarrelEx.Database do
   """
   @spec create!(String.t()) :: map()
   def create!(db_id) when is_bitstring(db_id) do
-    with url = make_url(),
-         db = Map.new(database_id: db_id) do
-      Request.post!(url, db)
-    end
+    db = Map.new(database_id: db_id)
+    create!(db)
   end
 
   @doc """
