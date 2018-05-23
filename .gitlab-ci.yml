@@ -12,6 +12,9 @@ before_script:
   - ./_build/prod/rel/barrel/bin/barrel start
   - cd ../barrel_ex
 
-mix:
+# services:
+#  - barrel/barrel:latest
+
+test:
   script:
   - mix test
