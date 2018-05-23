@@ -75,7 +75,7 @@ defmodule BarrelEx.Document do
 
   ## GET - ONE DOCUMENT OPTIONS
 
-  # TODO: @spec get(String.t(), String.t(), bool)
+  # TODO: @spec get(String.t(), String.t(), boolean())
 
   ## CREATE
 
@@ -95,35 +95,57 @@ defmodule BarrelEx.Document do
 
   ## DELETE
 
-  @spec delete(String.t(), map()) :: {atom(), map()}
-  def delete(db, doc) when is_map(doc) do
-    with doc = Map.fetch!(doc, "id") do
-      delete(db, doc)
+  @spec delete(String.t(), String.t(), String.t() | none()) :: {atom(), map()}
+  def delete(db, doc_id, e_tag \\ "") do
+    with url = make_url(db, doc_id),
+         headers = make_e_tag(e_tag) do
+      Request.delete(url, headers)
     end
   end
 
-  @spec delete(String.t(), String.t()) :: {atom(), map()}
-  def delete(db, doc_id) do
+  @spec delete!(String.t(), String.t(), String.t() | none()) :: map()
+  def delete!(db, doc_id, e_tag \\ "") do
+    with url = make_url(db, doc_id),
+         headers = make_e_tag(e_tag) do
+      Request.delete!(url, headers)
+    end
+  end
+
+  ## UPDATE
+
+  @spec update(String.t(), String.t(), map(), String.t(), boolean()) :: {atom(), map()}
+  def update(db, doc_id, doc, e_tag \\ "", edit \\ false) do
     with url = make_url(db, doc_id) do
-      Request.delete(url)
+      doc = Map.put_new(doc, "id", doc_id) # to add doc_id to body if doesn't exist
+      Request.put(url, doc, make_e_tag(e_tag), [edit: edit])
     end
   end
 
-  @spec delete!(String.t(), map()) :: {atom(), map()}
-  def delete!(db, doc) when is_map(doc) do
-    with doc = Map.fetch!(doc, "id") do
-      delete!(db, doc)
-    end
-  end
-
-  @spec delete!(String.t(), String.t()) :: {atom(), map()}
-  def delete!(db, doc_id) do
+  @spec update(String.t(), String.t(), map(), String.t(), boolean()) :: map()
+  def update!(db, doc_id, doc, e_tag \\ "", edit \\ false) do
     with url = make_url(db, doc_id) do
-      Request.delete!(url)
+      doc = Map.put_new(doc, "id", doc_id) # to add doc_id to body if doesn't exist
+      Request.put!(url, doc, make_e_tag(e_tag), [edit: edit])
     end
   end
+
+  ## HISTORY
 
   ## UTILS
+
+  defp make_e_tag(e_tag) do
+    case is_bitstring(e_tag) do
+      true -> ["ETag: " <> e_tag]
+      _ -> []
+    end
+  end
+
+  defp make_id_match(doc_ids) do
+    case is_list(doc_ids) do
+      true -> ["x-barrel-id-match: " <> Enum.join(doc_ids, ", ")] # TODO: test this header
+      _ -> []
+    end
+  end
 
   defp make_url(db) do
     "dbs/" <> db <> "/docs/"
