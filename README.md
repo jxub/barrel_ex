@@ -31,6 +31,8 @@ defmodule MyModule do
 end
 ```
 
+For more usage examples, have a look at the tests.
+
 ## Development
 
 Get the code for barrel-platform first, compile it and run in
@@ -42,6 +44,9 @@ $ cd barrel-platform
 $ make rel
 $ ./_build/prod/rel/barrel/bin/barrel start
 ```
+
+In case you'd like to see the list of all the supported operations,
+visit the API documentation at http://localhost:7080/api-doc/index.html.
 
 Then, get the code for BarrelEx:
 
