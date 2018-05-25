@@ -21,6 +21,7 @@ defmodule BarrelEx do
         Database,
         Document,
         Exception,
+        Replication,
         Server,
         Sysdoc
       }
