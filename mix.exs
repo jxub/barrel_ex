@@ -37,8 +37,7 @@ defmodule BarrelEx.MixProject do
     name: "barrel_ex_http",
     maintainers: ["Jakub Janarek"],
     licenses: ["MIT License"],
-    links: %{"Gitlab" => "https://gitlab.com/barrel-db/Clients/barrel_ex",
-    "GitHub" => "https://github.com/jxub/barrel_ex"}
+    links: %{"Gitlab" => "https://gitlab.com/barrel-db/Clients/barrel_ex", "GitHub" => "https://github.com/jxub/barrel_ex"}
   end
 
   # Run "mix help deps" to learn about dependencies.
