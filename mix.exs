@@ -34,10 +34,14 @@ defmodule BarrelEx.MixProject do
   end
 
   defp package do
-    name: "barrel_ex_http",
-    maintainers: ["Jakub Janarek"],
-    licenses: ["MIT License"],
-    links: %{"Gitlab" => "https://gitlab.com/barrel-db/Clients/barrel_ex", "GitHub" => "https://github.com/jxub/barrel_ex"}
+    [
+      name: "barrel_ex_http",
+      files: ["config", "lib", "test", "LICENSE", "mix.exs", "README.md"],
+      maintainers: ["Jakub Janarek"],
+      licenses: ["MIT License"],
+      links: %{"GitHub" => "https://github.com/jxub/barrel_ex",
+        "GitLab" => "https://gitlab.com/barrel-db/Clients/barrel_ex"}
+    ]
   end
 
   # Run "mix help deps" to learn about dependencies.
@@ -48,7 +52,8 @@ defmodule BarrelEx.MixProject do
       {:morphix, "~> 0.3.0"},
       {:credo, "~> 0.8", only: [:dev, :test]},
       {:excoveralls, "~> 0.8", only: :test},
-      {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
+      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
     ]
