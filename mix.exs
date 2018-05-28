@@ -7,7 +7,11 @@ defmodule BarrelEx.MixProject do
       version: "0.1.0",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
+      description: description(),
+      package: package(),
       deps: deps(),
+      name: "barrel_ex_http",
+      source_url: "https://gitlab.com/barrel-db/Clients/barrel_ex",
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -23,6 +27,18 @@ defmodule BarrelEx.MixProject do
     [
       extra_applications: [:logger]
     ]
+  end
+
+  defp description do
+    "Barrel-db HTTP API Elixir client"
+  end
+
+  defp package do
+    name: "barrel_ex_http",
+    maintainers: ["Jakub Janarek"],
+    licenses: ["MIT License"],
+    links: %{"Gitlab" => "https://gitlab.com/barrel-db/Clients/barrel_ex",
+    "GitHub" => "https://github.com/jxub/barrel_ex"}
   end
 
   # Run "mix help deps" to learn about dependencies.
