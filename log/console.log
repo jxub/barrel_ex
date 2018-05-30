@@ -1,0 +1,348 @@
+2018-05-28 13:45:03.808 [error] <0.266.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.271.0> exit with reason normal in context child_terminated
+2018-05-28 13:45:03.957 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-28 13:45:03.960 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-28 13:45:03.963 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-28 13:45:03.963 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-28 13:45:03.979 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-28 13:45:03.986 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-28 13:45:03.992 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-28 13:45:03.994 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-28 13:45:04.025 [info] <0.347.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-28 13:45:04.026 [info] <0.347.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-28 13:45:04.054 [info] <0.348.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-28 13:45:04.083 [warning] <0.390.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-28 13:45:04.090 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-28 13:45:04.090 [info] <0.33.0> Application barrex started on node nonode@nohost
+2018-05-28 13:45:04.111 [info] <0.33.0> Application ex_unit started on node nonode@nohost
+2018-05-28 13:48:05.042 [error] <0.200.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.205.0> exit with reason normal in context child_terminated
+2018-05-28 13:48:05.102 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-28 13:48:05.106 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-28 13:48:05.109 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-28 13:48:05.109 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-28 13:48:05.126 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-28 13:48:05.131 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-28 13:48:05.140 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-28 13:48:05.143 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-28 13:48:05.156 [info] <0.281.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-28 13:48:05.157 [info] <0.281.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-28 13:48:05.162 [info] <0.282.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-28 13:48:05.181 [warning] <0.324.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-28 13:48:05.186 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-28 13:48:05.187 [info] <0.33.0> Application barrex started on node nonode@nohost
+2018-05-28 13:50:27.630 [error] <0.177.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.182.0> exit with reason normal in context child_terminated
+2018-05-28 13:50:27.694 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-28 13:50:27.697 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-28 13:50:27.699 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-28 13:50:27.699 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-28 13:50:27.714 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-28 13:50:27.722 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-28 13:50:27.731 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-28 13:50:27.733 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-28 13:50:27.744 [info] <0.258.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-28 13:50:27.745 [info] <0.258.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-28 13:50:27.750 [info] <0.259.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-28 13:50:27.774 [warning] <0.301.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-28 13:50:27.778 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-28 13:50:27.778 [info] <0.33.0> Application barrex started on node nonode@nohost
+2018-05-28 13:50:47.466 [info] <0.316.0>@barrel_db_sup:start_db:39 start db: ref=<<"testdb">>, type=create, options=#{}
+2018-05-28 13:50:47.467 [error] <0.318.0>@gen_server:call CRASH REPORT Process <0.318.0> with 0 neighbours exited with reason: no such process or port in call to gen_server:call({via,gproc,{n,l,{barrel_storage,{error,no_stores}}}}, {create_barrel,<<"testdb">>,#{}}) in gen_server:call/2 line 206
+2018-05-28 13:51:08.443 [info] <0.316.0>@barrel_db_sup:start_db:39 start db: ref=<<"testdb">>, type=create, options=#{}
+2018-05-28 13:51:08.443 [error] <0.320.0>@gen_server:call CRASH REPORT Process <0.320.0> with 0 neighbours exited with reason: no such process or port in call to gen_server:call({via,gproc,{n,l,{barrel_storage,{error,no_stores}}}}, {create_barrel,<<"testdb">>,#{}}) in gen_server:call/2 line 206
+2018-05-28 13:52:13.067 [info] <0.316.0>@barrel_db_sup:start_db:39 start db: ref=<<"aa">>, type=open, options=#{}
+2018-05-28 13:52:17.152 [info] <0.316.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello">>, type=open, options=#{}
+2018-05-28 13:54:41.557 [info] <0.316.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello">>, type=open, options=#{}
+2018-05-28 14:12:16.609 [info] <0.316.0>@barrel_db_sup:start_db:39 start db: ref=<<>>, type=open, options=#{}
+2018-05-28 14:12:47.946 [info] <0.316.0>@barrel_db_sup:start_db:39 start db: ref=<<"aaa">>, type=create, options=#{}
+2018-05-28 14:12:47.947 [error] <0.365.0>@gen_server:call CRASH REPORT Process <0.365.0> with 0 neighbours exited with reason: no such process or port in call to gen_server:call({via,gproc,{n,l,{barrel_storage,{error,no_stores}}}}, {create_barrel,<<"aaa">>,#{}}) in gen_server:call/2 line 206
+2018-05-28 16:32:31.383 [info] <0.316.0>@barrel_db_sup:start_db:39 start db: ref=<<"aaa">>, type=create, options=#{}
+2018-05-28 16:32:31.384 [error] <0.408.0>@gen_server:call CRASH REPORT Process <0.408.0> with 0 neighbours exited with reason: no such process or port in call to gen_server:call({via,gproc,{n,l,{barrel_storage,{error,no_stores}}}}, {create_barrel,<<"aaa">>,#{}}) in gen_server:call/2 line 206
+2018-05-28 16:33:04.623 [info] <0.316.0>@barrel_db_sup:start_db:39 start db: ref=<<"aaa">>, type=create, options=#{}
+2018-05-28 16:35:07.116 [error] <0.200.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.205.0> exit with reason normal in context child_terminated
+2018-05-28 16:35:07.185 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-28 16:35:07.189 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-28 16:35:07.191 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-28 16:35:07.191 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-28 16:35:07.208 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-28 16:35:07.213 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-28 16:35:07.221 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-28 16:35:07.222 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-28 16:35:07.232 [info] <0.281.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-28 16:35:07.233 [info] <0.281.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-28 16:35:07.239 [info] <0.282.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-28 16:35:07.259 [warning] <0.324.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-28 16:35:07.264 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-28 16:35:26.315 [info] <0.342.0>@barrel_db_sup:start_db:39 start db: ref=<<"aa2\n">>, type=open, options=#{}
+2018-05-28 16:35:35.493 [info] <0.342.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello">>, type=create, options=#{}
+2018-05-28 16:35:44.560 [info] <0.342.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello2">>, type=create, options=#{}
+2018-05-29 11:14:12.404 [error] <0.16981.3>@Elixir.Barrex.DatabaseInfo:init:20 CRASH REPORT Process <0.16981.3> with 1 neighbours crashed with reason: no function clause matching 'Elixir.Barrex.DatabaseInfo':init(#{}) line 20
+2018-05-29 11:17:46.621 [error] <0.330.0> gen_server <0.330.0> terminated with reason: {timeout,{gen_server,call,[barrel_db_stream_mgr,{next,#{barrel => <<"hello">>,include_doc => true,interval => 100},#Ref<0.2704885489.1188823041.139430>,0}]}} in gen_server:call/2 line 206
+2018-05-29 11:17:46.622 [error] <0.330.0> CRASH REPORT Process <0.330.0> with 0 neighbours exited with reason: {timeout,{gen_server,call,[barrel_db_stream_mgr,{next,#{barrel => <<"hello">>,include_doc => true,interval => 100},#Ref<0.2704885489.1188823041.139430>,0}]}} in gen_server:call/2 line 206
+2018-05-29 11:17:46.622 [error] <0.328.0> Supervisor barrel_db_stream_agent_sup had child {barrel_db_stream_agent,2} started with barrel_db_stream_agent:start_link() at <0.330.0> exit with reason {timeout,{gen_server,call,[barrel_db_stream_mgr,{next,#{barrel => <<"hello">>,include_doc => true,interval => 100},#Ref<0.2704885489.1188823041.139430>,0}]}} in context child_terminated
+2018-05-29 11:17:46.825 [error] <0.337.0> gen_server barrel_db_stream_mgr terminated with reason: {{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]}
+2018-05-29 11:17:46.841 [error] <0.337.0> CRASH REPORT Process barrel_db_stream_mgr with 0 neighbours crashed with reason: {{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]}
+2018-05-29 11:17:46.842 [error] <0.326.0> Supervisor barrel_db_stream_sup had child barrel_db_stream_mgr started with barrel_db_stream_mgr:start_link() at <0.337.0> exit with reason {{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]} in context child_terminated
+2018-05-29 11:17:46.842 [error] <0.326.0> Supervisor barrel_db_stream_sup had child barrel_db_stream_mgr started with barrel_db_stream_mgr:start_link() at <0.337.0> exit with reason reached_max_restart_intensity in context shutdown
+2018-05-29 11:17:46.843 [error] <0.332.0> gen_server <0.332.0> terminated with reason: {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in gen_server:call/2 line 206
+2018-05-29 11:17:46.843 [error] <0.332.0> CRASH REPORT Process <0.332.0> with 0 neighbours exited with reason: {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in gen_server:call/2 line 206
+2018-05-29 11:17:46.844 [error] <0.331.0> gen_server <0.331.0> terminated with reason: {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in gen_server:call/2 line 206
+2018-05-29 11:17:46.844 [error] <0.331.0> CRASH REPORT Process <0.331.0> with 0 neighbours exited with reason: {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in gen_server:call/2 line 206
+2018-05-29 11:17:46.845 [error] <0.329.0> gen_server <0.329.0> terminated with reason: {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in gen_server:call/2 line 206
+2018-05-29 11:17:46.845 [error] <0.329.0> CRASH REPORT Process <0.329.0> with 0 neighbours exited with reason: {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in gen_server:call/2 line 206
+2018-05-29 11:17:46.846 [error] <0.19100.3> gen_server <0.19100.3> terminated with reason: {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in gen_server:call/2 line 206
+2018-05-29 11:17:46.846 [error] <0.19100.3> CRASH REPORT Process <0.19100.3> with 0 neighbours exited with reason: {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in gen_server:call/2 line 206
+2018-05-29 11:17:46.846 [error] <0.328.0> Supervisor barrel_db_stream_agent_sup had child {barrel_db_stream_agent,4} started with barrel_db_stream_agent:start_link() at <0.332.0> exit with reason {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in context shutdown_error
+2018-05-29 11:17:46.846 [error] <0.328.0> Supervisor barrel_db_stream_agent_sup had child {barrel_db_stream_agent,3} started with barrel_db_stream_agent:start_link() at <0.331.0> exit with reason {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in context shutdown_error
+2018-05-29 11:17:46.846 [error] <0.328.0> Supervisor barrel_db_stream_agent_sup had child {barrel_db_stream_agent,2} started with barrel_db_stream_agent:start_link() at <0.19100.3> exit with reason {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in context shutdown_error
+2018-05-29 11:17:46.846 [error] <0.328.0> Supervisor barrel_db_stream_agent_sup had child {barrel_db_stream_agent,1} started with barrel_db_stream_agent:start_link() at <0.329.0> exit with reason {{{badkey,#{barrel => <<"hello2">>,include_doc => true,interval => 100}},[{maps,get,[#{barrel => <<"hello2">>,include_doc => true,interval => 100},#{#{barrel => <<"hello">>,include_doc => true,interval => 100} => [{#Ref<0.2704885489.1188823041.139430>,#{pid => <0.355.0>,since => 0,timer => {interval,#Ref<0.2704885489.1188823041.139432>}}}]}],[]},{barrel_db_stream_mgr,handle_down_agent,3,[{file,"/home/jxub/projects/ex/barrex/deps/barrel/src/db/barrel_db_stream_mgr.erl"},{line,148}]},{barrel_db_stream_mgr,...},...]},...} in context shutdown_error
+2018-05-29 11:17:46.846 [error] <0.278.0> Supervisor barrel_sup had child barrel_db_stream_sup started with barrel_db_stream_sup:start_link() at <0.326.0> exit with reason shutdown in context child_terminated
+2018-05-29 11:24:41.920 [error] <0.182.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.187.0> exit with reason normal in context child_terminated
+2018-05-29 11:24:42.047 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 11:24:42.050 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 11:24:42.052 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 11:24:42.052 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 11:24:42.066 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 11:24:42.073 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 11:24:42.085 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 11:24:42.087 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 11:24:42.097 [info] <0.263.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 11:24:42.097 [info] <0.263.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 11:24:42.109 [info] <0.264.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 11:24:42.154 [warning] <0.306.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 11:24:42.159 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 11:24:42.161 [error] <0.324.0> Supervisor 'Elixir.DatabaseInfoSupervisor' had child 'Elixir.Barrex.DatabaseInfo' started with 'Elixir.Barrex.DatabaseInfo':start_link([{name,'Elixir.DatabaseInfo'}]) at undefined exit with reason {'EXIT',{undef,[{'Elixir.Barrex.DatabaseInfo',start_link,[[{name,'Elixir.DatabaseInfo'}]],[]},{supervisor,do_start_child,2,[{file,"supervisor.erl"},{line,365}]},{supervisor,start_children,3,[{file,"supervisor.erl"},{line,348}]},{supervisor,init_children,2,[{file,"supervisor.erl"},{line,314}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,365}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,333}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,247}]}]}} in context start_error
+2018-05-29 11:24:42.161 [error] <0.321.0> CRASH REPORT Process <0.321.0> with 0 neighbours exited with reason: {{shutdown,{failed_to_start_child,'Elixir.Barrex.DatabaseInfo',{'EXIT',{undef,[{'Elixir.Barrex.DatabaseInfo',start_link,[[{name,'Elixir.DatabaseInfo'}]],[]},{supervisor,do_start_child,2,[{file,"supervisor.erl"},{line,365}]},{supervisor,start_children,3,[{file,"supervisor.erl"},{line,348}]},{supervisor,init_children,2,[{file,"supervisor.erl"},{line,314}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,365}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,333}]},{proc_lib,init_p_do_apply,...}]}}}},...} in application_master:init/4 line 134
+2018-05-29 11:24:42.311 [info] <0.33.0> Application barrex exited with reason: {{shutdown,{failed_to_start_child,'Elixir.Barrex.DatabaseInfo',{'EXIT',{undef,[{'Elixir.Barrex.DatabaseInfo',start_link,[[{name,'Elixir.DatabaseInfo'}]],[]},{supervisor,do_start_child,2,[{file,"supervisor.erl"},{line,365}]},{supervisor,start_children,3,[{file,"supervisor.erl"},{line,348}]},{supervisor,init_children,2,[{file,"supervisor.erl"},{line,314}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,365}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,333}]},{proc_lib,init_p_do_apply,...}]}}}},...}
+2018-05-29 11:25:25.120 [error] <0.177.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.182.0> exit with reason normal in context child_terminated
+2018-05-29 11:25:25.200 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 11:25:25.205 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 11:25:25.207 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 11:25:25.207 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 11:25:25.222 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 11:25:25.227 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 11:25:25.234 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 11:25:25.236 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 11:25:25.245 [info] <0.258.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 11:25:25.246 [info] <0.258.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 11:25:25.252 [info] <0.259.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 11:25:25.273 [warning] <0.301.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 11:25:25.280 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 11:26:56.316 [info] <0.321.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello">>, type=create, options=#{}
+2018-05-29 11:31:11.174 [info] <0.321.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello">>, type=open, options=#{}
+2018-05-29 11:33:14.434 [info] <0.321.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello">>, type=open, options=#{}
+2018-05-29 11:33:20.581 [info] <0.321.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello">>, type=create, options=#{}
+2018-05-29 11:33:31.306 [error] <0.168.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.173.0> exit with reason normal in context child_terminated
+2018-05-29 11:33:31.442 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 11:33:31.445 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 11:33:31.448 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 11:33:31.448 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 11:33:31.463 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 11:33:31.470 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 11:33:31.478 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 11:33:31.482 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 11:33:31.495 [info] <0.249.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 11:33:31.495 [info] <0.249.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 11:33:31.501 [info] <0.250.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 11:33:31.520 [warning] <0.292.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 11:33:31.530 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 11:33:41.756 [info] <0.312.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello">>, type=create, options=#{}
+2018-05-29 11:41:25.090 [info] <0.312.0>@barrel_db_sup:start_db:39 start db: ref=<<"aaaa">>, type=create, options=#{}
+2018-05-29 11:43:02.136 [info] <0.312.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello1">>, type=create, options=#{}
+2018-05-29 11:43:14.812 [error] <0.7340.0> Supervisor 'Elixir.DBInfo' had child 'Elixir.Barrex.DatabaseInfo' started with 'Elixir.Barrex.DatabaseInfo':start_link([{name,'Elixir.DBInfo'}]) at undefined exit with reason {already_started,<0.7340.0>} in context start_error
+2018-05-29 11:55:06.385 [error] <0.28702.0> Supervisor 'Elixir.DBInfo' had child 'Elixir.Barrex.DatabaseInfo' started with 'Elixir.Barrex.DatabaseInfo':start_link([{name,'Elixir.DBInfo'}]) at undefined exit with reason {already_started,<0.28702.0>} in context start_error
+2018-05-29 11:55:54.921 [info] <0.33.0> Application barrex exited with reason: stopped
+2018-05-29 11:56:03.119 [error] <0.30412.0> Supervisor 'Elixir.DBInfo' had child 'Elixir.Barrex.DatabaseInfo' started with 'Elixir.Barrex.DatabaseInfo':start_link([{name,'Elixir.DBInfo'}]) at undefined exit with reason {already_started,<0.30412.0>} in context start_error
+2018-05-29 11:56:11.358 [error] <0.168.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.173.0> exit with reason normal in context child_terminated
+2018-05-29 11:56:11.445 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 11:56:11.450 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 11:56:11.452 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 11:56:11.452 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 11:56:11.469 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 11:56:11.475 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 11:56:11.486 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 11:56:11.490 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 11:56:11.501 [info] <0.249.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 11:56:11.502 [info] <0.249.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 11:56:11.507 [info] <0.250.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 11:56:11.526 [warning] <0.292.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 11:56:11.533 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 11:56:49.070 [error] <0.177.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.182.0> exit with reason normal in context child_terminated
+2018-05-29 11:56:49.217 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 11:56:49.221 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 11:56:49.223 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 11:56:49.223 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 11:56:49.238 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 11:56:49.244 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 11:56:49.253 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 11:56:49.255 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 11:56:49.265 [info] <0.258.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 11:56:49.266 [info] <0.258.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 11:56:49.273 [info] <0.259.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 11:56:49.304 [warning] <0.301.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 11:56:49.310 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 11:56:49.311 [error] <0.316.0>@Elixir.Barrex.DatabaseInfoSupervisor:stop CRASH REPORT Process <0.316.0> with 0 neighbours exited with reason: call to undefined function 'Elixir.Barrex.DatabaseInfoSupervisor':stop() in application_master:init/4 line 134
+2018-05-29 11:57:01.883 [error] <0.177.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.182.0> exit with reason normal in context child_terminated
+2018-05-29 11:57:01.969 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 11:57:01.973 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 11:57:01.975 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 11:57:01.975 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 11:57:01.990 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 11:57:01.998 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 11:57:02.008 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 11:57:02.010 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 11:57:02.021 [info] <0.258.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 11:57:02.023 [info] <0.258.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 11:57:02.027 [info] <0.259.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 11:57:02.048 [warning] <0.301.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 11:57:02.053 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 11:57:02.057 [error] <0.319.0> Supervisor 'Elixir.DBInfo' had child 'Elixir.Barrex.DatabaseInfo' started with 'Elixir.Barrex.DatabaseInfo':start_link([{name,'Elixir.DBInfo'}]) at undefined exit with reason {already_started,<0.319.0>} in context start_error
+2018-05-29 11:57:02.057 [error] <0.316.0> CRASH REPORT Process <0.316.0> with 0 neighbours exited with reason: {{shutdown,{failed_to_start_child,'Elixir.Barrex.DatabaseInfo',{already_started,<0.319.0>}}},{'Elixir.Barrex',start,[normal,[]]}} in application_master:init/4 line 134
+2018-05-29 11:57:02.212 [info] <0.33.0> Application barrex exited with reason: {{shutdown,{failed_to_start_child,'Elixir.Barrex.DatabaseInfo',{already_started,<0.319.0>}}},{'Elixir.Barrex',start,[normal,[]]}}
+2018-05-29 11:57:57.515 [error] <0.168.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.173.0> exit with reason normal in context child_terminated
+2018-05-29 11:57:57.603 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 11:57:57.607 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 11:57:57.609 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 11:57:57.609 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 11:57:57.624 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 11:57:57.630 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 11:57:57.638 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 11:57:57.640 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 11:57:57.649 [info] <0.249.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 11:57:57.650 [info] <0.249.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 11:57:57.660 [info] <0.250.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 11:57:57.681 [warning] <0.292.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 11:57:57.685 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 11:58:52.777 [error] <0.168.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.173.0> exit with reason normal in context child_terminated
+2018-05-29 11:58:52.874 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 11:58:52.877 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 11:58:52.879 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 11:58:52.879 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 11:58:52.895 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 11:58:52.901 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 11:58:52.911 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 11:58:52.913 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 11:58:52.924 [info] <0.249.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 11:58:52.926 [info] <0.249.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 11:58:52.930 [info] <0.250.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 11:58:52.951 [warning] <0.292.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 11:58:52.960 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 12:04:12.456 [error] <0.168.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.173.0> exit with reason normal in context child_terminated
+2018-05-29 12:04:12.805 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 12:04:12.809 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 12:04:12.811 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 12:04:12.811 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 12:04:12.823 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 12:04:12.830 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 12:04:12.841 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 12:04:12.844 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 12:04:12.854 [info] <0.249.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 12:04:12.854 [info] <0.249.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 12:04:12.859 [info] <0.250.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 12:04:12.881 [warning] <0.292.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 12:04:12.886 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 12:05:18.893 [error] <0.177.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.182.0> exit with reason normal in context child_terminated
+2018-05-29 12:05:19.008 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 12:05:19.011 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 12:05:19.013 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 12:05:19.013 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 12:05:19.027 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 12:05:19.035 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 12:05:19.044 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 12:05:19.046 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 12:05:19.055 [info] <0.258.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 12:05:19.055 [info] <0.258.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 12:05:19.061 [info] <0.259.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 12:05:19.084 [warning] <0.301.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 12:05:19.089 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 12:05:19.091 [error] <0.319.0> Supervisor 'Elixir.DBInfo' had child 'Elixir.Barrex.DatabaseInfo' started with 'Elixir.Barrex.DatabaseInfo':start_link({name,'Elixir.DBInfo'}) at undefined exit with reason {'EXIT',{function_clause,[{'Elixir.GenServer',start_link,['Elixir.Barrex.DatabaseInfo',ok,{name,'Elixir.DBInfo'}],[{file,"lib/gen_server.ex"},{line,728}]},{supervisor,do_start_child,2,[{file,"supervisor.erl"},{line,365}]},{supervisor,start_children,3,[{file,"supervisor.erl"},{line,348}]},{supervisor,init_children,2,[{file,"supervisor.erl"},{line,314}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,365}]},{gen_server,init_it,6,[{file,"gen_server.erl"},{line,333}]},{proc_lib,init_p_do_apply,...}]}} in context start_error
+2018-05-29 12:05:19.092 [error] <0.316.0> CRASH REPORT Process <0.316.0> with 0 neighbours exited with reason: {{shutdown,{failed_to_start_child,'Elixir.Barrex.DatabaseInfo',{'EXIT',{function_clause,[{'Elixir.GenServer',start_link,['Elixir.Barrex.DatabaseInfo',ok,{name,'Elixir.DBInfo'}],[{file,"lib/gen_server.ex"},{line,728}]},{supervisor,do_start_child,2,[{file,"supervisor.erl"},{line,365}]},{supervisor,start_children,3,[{file,"supervisor.erl"},{line,348}]},{supervisor,init_children,2,[{file,"supervisor.erl"},{line,314}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,365}]},{gen_server,init_it,...},...]}}}},...} in application_master:init/4 line 134
+2018-05-29 12:05:19.380 [info] <0.33.0> Application barrex exited with reason: {{shutdown,{failed_to_start_child,'Elixir.Barrex.DatabaseInfo',{'EXIT',{function_clause,[{'Elixir.GenServer',start_link,['Elixir.Barrex.DatabaseInfo',ok,{name,'Elixir.DBInfo'}],[{file,"lib/gen_server.ex"},{line,728}]},{supervisor,do_start_child,2,[{file,"supervisor.erl"},{line,365}]},{supervisor,start_children,3,[{file,"supervisor.erl"},{line,348}]},{supervisor,init_children,2,[{file,"supervisor.erl"},{line,314}]},{gen_server,init_it,2,[{file,"gen_server.erl"},{line,365}]},{gen_server,init_it,...},...]}}}},...}
+2018-05-29 12:05:34.888 [error] <0.177.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.182.0> exit with reason normal in context child_terminated
+2018-05-29 12:05:34.996 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 12:05:35.000 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 12:05:35.002 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 12:05:35.002 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 12:05:35.014 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 12:05:35.022 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 12:05:35.033 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 12:05:35.035 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 12:05:35.047 [info] <0.258.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 12:05:35.047 [info] <0.258.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 12:05:35.052 [info] <0.259.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 12:05:35.075 [warning] <0.301.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 12:05:35.080 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 12:05:35.081 [info] <0.33.0> Application barrex started on node nonode@nohost
+2018-05-29 12:07:45.805 [error] <0.305.0> Supervisor barrel_db_stream_agent_sup had child {barrel_db_stream_agent,5} started with barrel_db_stream_agent:start_link() at <0.310.0> exit with reason normal in context child_terminated
+2018-05-29 12:08:00.498 [error] <0.177.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.182.0> exit with reason normal in context child_terminated
+2018-05-29 12:08:00.622 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 12:08:00.626 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 12:08:00.628 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 12:08:00.628 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 12:08:00.641 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 12:08:00.648 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 12:08:00.658 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 12:08:00.662 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 12:08:00.673 [info] <0.258.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 12:08:00.674 [info] <0.258.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 12:08:00.678 [info] <0.259.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 12:08:00.700 [warning] <0.301.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 12:08:00.705 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 12:08:48.366 [error] <0.177.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.182.0> exit with reason normal in context child_terminated
+2018-05-29 12:08:48.791 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 12:08:48.794 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 12:08:48.796 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 12:08:48.796 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 12:08:48.809 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 12:08:48.817 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 12:08:48.826 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 12:08:48.828 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 12:08:48.837 [info] <0.258.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 12:08:48.838 [info] <0.258.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 12:08:48.842 [info] <0.259.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 12:08:48.866 [warning] <0.301.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 12:08:48.873 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 12:11:39.568 [error] <0.168.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.173.0> exit with reason normal in context child_terminated
+2018-05-29 12:11:39.698 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 12:11:39.702 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 12:11:39.704 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 12:11:39.704 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 12:11:39.717 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 12:11:39.726 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 12:11:39.736 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 12:11:39.738 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 12:11:39.748 [info] <0.249.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 12:11:39.749 [info] <0.249.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 12:11:39.753 [info] <0.250.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 12:11:39.782 [warning] <0.292.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 12:11:39.787 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 14:41:59.119 [error] <0.168.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.173.0> exit with reason normal in context child_terminated
+2018-05-29 14:41:59.237 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 14:41:59.240 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 14:41:59.243 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 14:41:59.243 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 14:41:59.256 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 14:41:59.266 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 14:41:59.275 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 14:41:59.277 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 14:41:59.287 [info] <0.249.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 14:41:59.287 [info] <0.249.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 14:41:59.292 [info] <0.250.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 14:41:59.379 [warning] <0.292.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 14:41:59.385 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 14:45:42.680 [error] <0.182.0> Supervisor 'Elixir.Logger.Supervisor' had child 'Elixir.Logger.ErrorHandler' started with 'Elixir.Logger.Watcher':start_link({error_logger,'Elixir.Logger.ErrorHandler',{true,false,500}}) at <0.187.0> exit with reason normal in context child_terminated
+2018-05-29 14:45:42.806 [info] <0.33.0> Application lager started on node nonode@nohost
+2018-05-29 14:45:42.809 [info] <0.33.0> Application memstore started on node nonode@nohost
+2018-05-29 14:45:42.812 [info] <0.33.0> Application quickrand started on node nonode@nohost
+2018-05-29 14:45:42.812 [info] <0.33.0> Application uuid started on node nonode@nohost
+2018-05-29 14:45:42.834 [info] <0.33.0> Application gproc started on node nonode@nohost
+2018-05-29 14:45:42.841 [info] <0.33.0> Application sbroker started on node nonode@nohost
+2018-05-29 14:45:42.852 [info] <0.33.0> Application hooks started on node nonode@nohost
+2018-05-29 14:45:42.853 [info] <0.33.0> Application ehash started on node nonode@nohost
+2018-05-29 14:45:42.866 [info] <0.263.0>@barrel_disk_monitor:enable:288 Enabling free disk space monitoring
+2018-05-29 14:45:42.867 [info] <0.263.0>@barrel_disk_monitor:set_disk_limits:202 Disk free limit set to 50MB
+2018-05-29 14:45:42.872 [info] <0.264.0>@barrel_vm_memory_monitor:set_mem_limits:371 Memory high watermark set to 6373 MiB (6683069644 bytes) of 15933 MiB (16707674112 bytes) total
+2018-05-29 14:45:42.893 [warning] <0.306.0>@barrel_store_sup:empty_stores_warning:69 no storage setup.
+2018-05-29 14:45:42.900 [info] <0.33.0> Application barrel started on node nonode@nohost
+2018-05-29 16:24:45.457 [info] <0.324.0>@barrel_db_sup:start_db:39 start db: ref=nil, type=open, options=#{}
+2018-05-29 16:24:49.324 [info] <0.324.0>@barrel_db_sup:start_db:39 start db: ref=<<"nil">>, type=open, options=#{}
+2018-05-29 16:24:52.949 [info] <0.324.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello">>, type=open, options=#{}
+2018-05-29 16:27:32.927 [info] <0.324.0>@barrel_db_sup:start_db:39 start db: ref=<<"hello">>, type=open, options=#{}
