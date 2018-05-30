@@ -1,6 +1,10 @@
 defmodule Barrex.Database do
+  use Agent
   alias Barrex.DatabaseInfo
 
+  @doc """
+  Create a barrel, (note: for now the options is an empty map).
+  """
   # @spec create(String.t(), map() | none()) :: {atom(), String.t()}
   @spec create(String.t(), map() | none()) :: {atom(), atom()}
   def create(name, options \\ %{}) do
@@ -12,6 +16,9 @@ defmodule Barrex.Database do
     end
   end
 
+  @doc """
+  Delete a barrel.
+  """
   # @spec delete(String.t()) :: {atom(), String.t()}
   @spec delete(String.t()) :: {atom(), atom()}
   def delete(name) do
@@ -23,6 +30,9 @@ defmodule Barrex.Database do
     end
   end
 
+  @doc """
+  Return barrel_infos.
+  """
   @spec info(String.t()) :: {String.t(), non_neg_integer(), non_neg_integer(), non_neg_integer()}
   def info(name) do
     :barrel.barrel_infos(name)
