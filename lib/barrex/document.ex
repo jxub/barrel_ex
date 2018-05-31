@@ -1,4 +1,8 @@
 defmodule Barrex.Document do
+  @moduledoc """
+  Module to interact with barrel documents and its
+  creation, deletion, updates...
+  """
   
   @doc """
   Lookup a doc by its `doc_id`.

@@ -1,6 +1,10 @@
 defmodule Barrex.Database do
-  use Agent
-  alias Barrex.DatabaseInfo
+  @moduledoc """
+  Module for database creation, destruction and info.
+  """
+
+  # use Agent
+  # alias Barrex.DatabaseInfo
 
   @doc """
   Create a barrel, (note: for now the options is an empty map).
