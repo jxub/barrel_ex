@@ -15,8 +15,11 @@ defmodule Barrex.Database do
     case :barrel.create_barrel(name, options) do
       # :ok -> {:ok, DatabaseInfo.add(DBInfo, name)}
       # {:error, reason} -> {:error, Atom.to_string(reason)}
-      :ok -> {:ok, :created}
-      {:error, reason} -> {:error, reason}
+      :ok ->
+        {:ok, :created}
+
+      {:error, reason} ->
+        {:error, reason}
     end
   end
 
@@ -29,8 +32,11 @@ defmodule Barrex.Database do
     case :barrel.delete_barrel(name) do
       # :ok -> {:ok, DatabaseInfo.delete(DBInfo, name)}
       # {:error, reason} -> {:error, Atom.to_string(reason)}
-      :ok -> {:ok, :deleted}
-      {:error, reason} -> {:error, reason}
+      :ok ->
+        {:ok, :deleted}
+
+      {:error, reason} ->
+        {:error, reason}
     end
   end
 
