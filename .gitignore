@@ -26,4 +26,6 @@ barrex-*.tar
 
 /log/
 
+BARREL_TS
+
 **.log
