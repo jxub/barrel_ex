@@ -19,7 +19,7 @@ defmodule Barrex.Stream do
   @type stream :: %__MODULE__{}
 
   @typedoc """
-  `ret_stream` is the return type after stream subscription.
+  The type `ret_stream` is the return type after stream subscription.
   """
   @type ret_stream :: {atom(), atom() | map(), map()}
 
@@ -91,57 +91,13 @@ defmodule Barrex.Stream do
   end
 
   @doc """
-  defmacro subscribe(stream) do
-    quote do
-      var!(pid) = self()
-      var!(stream) = unquote(stream)
-      subscribe(stream, pid, 0)
-    end
-  end
-
-  defmacro with_subscribe(stream do: code) do
-    quote do
-      subscribe(stream)
-      unquote(code)
-      unsubscribe(stream)
-    end
-  end
-
-  with_subscribe "testdb" do
-    receive do {changes, _} do
-      nil
-    end
-  end
-
-  subscribe "testdb" do
-    {changes, nil}
-  end
-  defimpl Enumerable for: Barrex.Streams do
-    def count(enum) do
-      nil
-    end
-
-    def member?(enum, elem) do
-      nil
-    end
-
-    def reduce(enum, acc, fun) do
-      nil
-    end
-
-    def slice(enum) do
-      nil
-    end
-  end
-
-  """
-
-  @doc """
   Unsubscribe and stop receiving changes from the remote database.
   """
   @spec unsubscribe(stream()) :: atom()
   def unsubscribe(stream) do
-    :barrel.unsubscribe_change(stream)
+    stream
+    |> drop_interval()
+    |> :barrel.unsubscribe_change()
   end
 
   @doc """
@@ -149,7 +105,9 @@ defmodule Barrex.Stream do
   """
   @spec unsubscribe(stream(), pid()) :: atom()
   def unsubscribe(stream, pid) do
-    :barrel.unsubscribe_change(stream, pid)
+    stream
+    |> drop_interval()
+    |> :barrel.unsubscribe_change(pid)
   end
 
   @doc """
@@ -158,6 +116,13 @@ defmodule Barrex.Stream do
   """
   @spec unsubscribe(node(), stream(), pid()) :: atom()
   def unsubscribe(node, stream, pid) do
+    stream = stream |> drop_interval()
     :barrel.unsubscribe_change(node, stream, pid)
+  end
+
+  def drop_interval(stream) do
+    stream
+    |> IO.inspect
+    |> Map.drop([:since, :__struct__])
   end
 end
