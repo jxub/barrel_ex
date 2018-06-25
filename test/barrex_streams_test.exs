@@ -4,7 +4,7 @@ defmodule BarrexStreamsTest do
   alias Barrex.{
     Database,
     Document,
-    Streams
+    Stream
   }
 
   setup do
@@ -13,30 +13,34 @@ defmodule BarrexStreamsTest do
     %{dbname: "testdb"}
   end
 
-  test "basic streams implementation", %{dbname: dbname} do
+  test "basic stream implementation", %{dbname: dbname} do
     Database.delete(dbname)
     assert {:ok, :created} == Database.create(dbname)
 
     :timer.sleep(100)
-    stream = Streams.new(dbname)
+    stream = Stream.new(dbname)
 
-    assert :ok == Streams.subscribe(stream, self(), 0)
+    {:ok, stream} == Stream.subscribe(stream)
     docs = [%{"id" => "a", "k" => "v"}, %{"id" => "b", "k" => "v2"}]
-    [{:ok, "a", rev1}, {:ok, "b", rev2}] =
-      Document.save(dbname, docs)
+    [{:ok, "a", rev1}, {:ok, "b", rev2}] = Document.save(dbname, docs)
     :timer.sleep(200)
 
     receive do
-      {:changes, stream, changes, last_seq} ->
-        assert last_seq == 2
+       {:changes, stream, changes, last_seq}->
+        IO.inspect({:changes, stream, changes, last_seq})
         # Pattern matching with assert fails on complex maps,
         # so just do a raw `=`.
-        changes = [%{"id" => "a", "rev" => rev1}, %{"id" => "b", "rev" => rev2}]
+        seq1 = Enum.at(changes, 0) |> Map.fetch!("seq")
+        seq2 = Enum.at(changes, 1) |> Map.fetch!("seq")
+        changes = [
+          %{"id" => "a", "rev" => rev1, "seq" => seq1},
+          %{"id" => "b", "rev" => rev2, "seq" => seq2}
+        ]
+        assert last_seq == seq2
     after
       5_000 -> raise "receive timeout"
     end
-
-    assert :ok == Streams.unsubscribe(stream, self())
+    assert :ok == Stream.unsubscribe(stream)
     :timer.sleep(200)
     assert {:ok, :deleted} == Database.delete(dbname)
   end
