@@ -96,7 +96,7 @@ defmodule Barrex.Stream do
   @spec unsubscribe(stream()) :: atom()
   def unsubscribe(stream) do
     stream
-    |> drop_interval()
+    |> format()
     |> :barrel.unsubscribe_change()
   end
 
@@ -106,7 +106,7 @@ defmodule Barrex.Stream do
   @spec unsubscribe(stream(), pid()) :: atom()
   def unsubscribe(stream, pid) do
     stream
-    |> drop_interval()
+    |> format()
     |> :barrel.unsubscribe_change(pid)
   end
 
@@ -116,13 +116,12 @@ defmodule Barrex.Stream do
   """
   @spec unsubscribe(node(), stream(), pid()) :: atom()
   def unsubscribe(node, stream, pid) do
-    stream = stream |> drop_interval()
+    stream = stream |> format()
     :barrel.unsubscribe_change(node, stream, pid)
   end
 
-  def drop_interval(stream) do
+  defp format(stream) do
     stream
-    |> IO.inspect
     |> Map.drop([:since, :__struct__])
   end
 end
