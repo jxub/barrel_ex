@@ -1,6 +1,6 @@
 %{
   "backoff": {:hex, :backoff, "1.1.6", "83b72ed2108ba1ee8f7d1c22e0b4a00cfe3593a67dbc792799e8cce9f42f796b", [:rebar3], [], "hexpm"},
-  "barrel": {:git, "https://gitlab.com/barrel-db/barrel.git", "9fcc08c46be020c8401ed050be42d0b61b5a189b", [branch: "store"]},
+  "barrel": {:git, "https://gitlab.com/barrel-db/barrel.git", "c845cb0b624187d7baf1ea39cc7f035dea109cd6", [branch: "store"]},
   "barrel_ex": {:hex, :barrel_ex_http, "0.1.0", "50bcdf6d56f20e60eaa70899c8a00f6591550665425e4185ffb4374864db00e4", [:mix], [{:httpoison, "~> 1.1.0", [hex: :httpoison, repo: "hexpm", optional: false]}, {:jason, "~> 1.0", [hex: :jason, repo: "hexpm", optional: false]}, {:morphix, "~> 0.3.0", [hex: :morphix, repo: "hexpm", optional: false]}], "hexpm"},
   "certifi": {:hex, :certifi, "2.3.1", "d0f424232390bf47d82da8478022301c561cf6445b5b5fb6a84d49a9e76d2639", [:rebar3], [{:parse_trans, "3.2.0", [hex: :parse_trans, repo: "hexpm", optional: false]}], "hexpm"},
   "ehash": {:hex, :ehash, "0.2.1", "b3f73406c19fba8ace6598db0b6252b0eca5d8b3c0606ca7d69faf6baf442710", [:rebar3], [], "hexpm"},
