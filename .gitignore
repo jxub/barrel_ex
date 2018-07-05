@@ -30,6 +30,4 @@ BARREL_TS
 
 **.log
 
-/barrex_data/
-
-barrex_ts
+/barrex_data/barrex_ts
