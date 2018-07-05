@@ -18,8 +18,8 @@ defmodule Barrex do
 
   def config do
     Application.put_env(:barrel, :stores, [])
-    Application.put_env(:barrel, :data_dir, "barrex_data")
-    Application.put_env(:barrel, :ts_file, "barrex_ts")
+    Application.put_env(:barrel, :data_dir, "data")
+    Application.put_env(:barrel, :ts_file, "BARREL_TS")
     Application.put_env(:barrel_stats, :update_interval, 500)
     
     :ok
