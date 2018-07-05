@@ -29,3 +29,5 @@ barrex-*.tar
 BARREL_TS
 
 **.log
+
+/barrex_data/
