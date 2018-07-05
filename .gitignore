@@ -22,5 +22,10 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 barrex-*.tar
 
+/data/
+
 /log/
 
+BARREL_TS
+
+**.log

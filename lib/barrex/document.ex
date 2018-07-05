@@ -1,5 +1,9 @@
 defmodule Barrex.Document do
-  
+  @moduledoc """
+  Module to interact with barrel documents and its
+  creation, deletion, updates...
+  """
+
   @doc """
   Lookup a doc by its `doc_id`.
   """
@@ -22,8 +26,10 @@ defmodule Barrex.Document do
     conflict will be returned as well
   - if the user try to replace a doc that has been deleted,
     a not_found error will be returned
+
+  TODO: finish spec
   """
-  @spec save_one(String.t(), map()) :: {atom(), String.t(), String.t()} | 
+  @spec save_one(String.t(), map()) :: {atom(), String.t(), String.t()}
   def save_one(barrel, doc) do
     :barrel.save_doc(barrel, doc)
   end
@@ -50,7 +56,7 @@ defmodule Barrex.Document do
   @doc """
   Like save_doc but create or replace multiple docs at once.
   """
-  @spec save(String(), list(map)) :: list(any())
+  @spec save(String.t(), list(map())) :: list(any())
   def save(barrel, docs) do
     :barrel.save_docs(barrel, docs)
   end
@@ -61,7 +67,7 @@ defmodule Barrex.Document do
   """
   @spec delete(String.t(), list(String.t())) :: list(any())
   def delete(barrel, docs) do
-    :barrel.delete_docs(name, docs)
+    :barrel.delete_docs(barrel, docs)
   end
 
   @doc """
@@ -72,20 +78,20 @@ defmodule Barrex.Document do
   replication to store its state?
   """
   def save_local(barrel, doc_id, doc) do
-    :barrel.save_local_doc(name, doc_id, doc)
+    :barrel.save_local_doc(barrel, doc_id, doc)
   end
 
   @doc """
   Delete a local document.
   """
-  def delete_local(name, doc_id) do
-    :barrel.delete_local_doc(name, doc_id)
+  def delete_local(barrel, doc_id) do
+    :barrel.delete_local_doc(barrel, doc_id)
   end
 
   @doc """
   Fetch a local document.
   """
-  def get_local(name, doc_id) do
-    :barrel.get_local_doc(name, doc_id)
+  def get_local(barrel, doc_id) do
+    :barrel.get_local_doc(barrel, doc_id)
   end
 end
