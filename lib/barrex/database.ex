@@ -10,8 +10,7 @@ defmodule Barrex.Database do
     """
     @type t :: __MODULE__
 
-    defstruct [:docs_count, :id, :indexed_seq,
-      :name, :store, :tab, :updated_seq]
+    defstruct [:docs_count, :id, :indexed_seq, :name, :store, :tab, :updated_seq]
   end
 
   defmodule Options do
@@ -28,10 +27,10 @@ defmodule Barrex.Database do
   @doc """
   Create a barrel, (note: for now the options is an empty map).
   """
-  @spec create(String.t) :: {atom, atom}
+  @spec create(String.t()) :: {atom, atom}
   def create(name), do: create(name, %Options{})
 
-  @spec create(String.t, map | none) :: {atom, atom}
+  @spec create(String.t(), map | none) :: {atom, atom}
   def create(name, %Options{} = options) do
     with opts <- Map.from_struct(options) do
       case :barrel.create_barrel(name, opts) do
@@ -40,7 +39,7 @@ defmodule Barrex.Database do
 
         {:error, :already_exists} ->
           {:error, :already_exists}
-        
+
         {:error, _reason} ->
           {:error, :unknown}
       end
@@ -50,7 +49,7 @@ defmodule Barrex.Database do
   @doc """
   Delete a barrel.
   """
-  @spec delete(String.t) :: {atom, atom}
+  @spec delete(String.t()) :: {atom, atom}
   def delete(name) do
     case :barrel.delete_barrel(name) do
       :ok ->
@@ -76,7 +75,7 @@ defmodule Barrex.Database do
       updated_seq: 0
     }
   """
-  @spec info(String.t) :: {atom, atom | Info.t}
+  @spec info(String.t()) :: {atom, atom | Info.t()}
   def info(name) do
     case :barrel.barrel_infos(name) do
       {:error, reason} ->
