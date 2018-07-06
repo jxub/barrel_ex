@@ -26,20 +26,23 @@ defmodule BarrexStreamsTest do
     :timer.sleep(200)
 
     receive do
-       {:changes, stream, changes, last_seq}->
+      {:changes, stream, changes, last_seq} ->
         IO.inspect({:changes, stream, changes, last_seq})
         # Pattern matching with assert fails on complex maps,
         # so just do a raw `=`.
         seq1 = Enum.at(changes, 0) |> Map.fetch!("seq")
         seq2 = Enum.at(changes, 1) |> Map.fetch!("seq")
+
         changes = [
           %{"id" => "a", "rev" => rev1, "seq" => seq1},
           %{"id" => "b", "rev" => rev2, "seq" => seq2}
         ]
+
         assert last_seq == seq2
     after
       5_000 -> raise "receive timeout"
     end
+
     assert :ok == Stream.unsubscribe(stream)
     :timer.sleep(200)
     assert {:ok, :deleted} == Database.delete(dbname)
