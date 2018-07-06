@@ -7,9 +7,21 @@ defmodule Barrex.Document do
   @doc """
   Lookup a doc by its `doc_id`.
   """
-  @spec fetch(String.t(), String.t(), map()) :: {atom(), map() | atom()}
+  @spec fetch(String.t(), String.t(), map) :: {atom, map | atom}
   def fetch(barrel, doc_id, opts \\ %{}) do
-    :barrel.fetch_doc(barrel, doc_id, opts)
+    case :barrel.fetch_doc(barrel, doc_id, opts) do
+      {:ok, doc} when is_map(doc) ->
+        {:ok, doc}
+
+      {:error, :not_found} ->
+        {:error, :not_found}
+
+      {:error, reason} ->
+        {:error, reason}
+
+      _ ->
+        raise "unhandled message"
+    end
   end
 
   @doc """
@@ -26,12 +38,22 @@ defmodule Barrex.Document do
     conflict will be returned as well
   - if the user try to replace a doc that has been deleted,
     a not_found error will be returned
-
-  TODO: finish spec
   """
-  @spec save_one(String.t(), map()) :: {atom(), String.t(), String.t()}
+  @spec save_one(String.t(), map) :: {atom, String.t(), String.t()}
   def save_one(barrel, doc) do
-    :barrel.save_doc(barrel, doc)
+    case :barrel.save_doc(barrel, doc) do
+      {:ok, doc_id, rev_id} ->
+        {:ok, doc_id, rev_id}
+
+      {:error, {doc_error, doc_id}} ->
+        {:error, doc_id, doc_err}
+
+      {:error, :db_not_found} ->
+        {:error, doc_id, :db_not_found}
+
+      _ ->
+        raise "unhandled message"
+    end
   end
 
   @doc """
@@ -39,8 +61,21 @@ defmodule Barrex.Document do
   from the filesystem but instead create a tombstone
   that allows barrel to replicate a deletion.
   """
+  @spec delete_one(String.t(), String.t(), String.t()) :: {atom, String.t(), String.t() | atom}
   def delete_one(barrel, doc_id, rev_id) do
-    :barrel.delete_doc(barrel, doc_id, rev_id)
+    case :barrel.delete_doc(barrel, doc_id, rev_id) do
+      {:ok, doc_id, rev_id} ->
+        {:ok, doc_id, rev_id}
+
+      {:error, {doc_error, doc_id}} ->
+        {:error, doc_id, doc_err}
+
+      {:error, :db_not_found} ->
+        {:error, doc_id, :db_not_found}
+
+      _ ->
+        raise "unhandled message"
+    end
   end
 
   @doc """
@@ -49,25 +84,59 @@ defmodule Barrex.Document do
   The deletion won't be replicated and
   will not crete an event.
   """
+  @spec purge(String.t(), String.t()) :: {atom, String.t() | atom}
   def purge(barrel, doc_id) do
-    :barrel.purge_doc(barrel, doc_id)
+    case :barrel.purge_doc(barrel, doc_id) do
+      :ok ->
+        {:ok, doc_id}
+
+      {:error, reason} ->
+        {:error, reason}
+
+      _ ->
+        raise "unhandled message"
+    end
   end
 
   @doc """
   Like save_doc but create or replace multiple docs at once.
   """
-  @spec save(String.t(), list(map())) :: list(any())
+  @spec save(String.t(), list(map)) :: list(any)
   def save(barrel, docs) do
-    :barrel.save_docs(barrel, docs)
+    case :barrel.save_docs(barrel, docs) do
+      {:ok, doc_id, rev_id} ->
+        {:ok, doc_id, rev_id}
+
+      {:error, {doc_error, doc_id}} ->
+        {:error, doc_id, doc_err}
+
+      {:error, :db_not_found} ->
+        {:error, doc_id, :db_not_found}
+
+      _ ->
+        raise "unhandled message"
+    end
   end
 
   @doc """
   Delete multiple docs. `docs` can be a list
   of `doc_id` or `rev_id`
   """
-  @spec delete(String.t(), list(String.t())) :: list(any())
+  @spec delete(String.t(), list(String.t())) :: list(any)
   def delete(barrel, docs) do
-    :barrel.delete_docs(barrel, docs)
+    case :barrel.delete_docs(barrel, docs) do
+      {:ok, doc_id, rev_id} ->
+        {:ok, doc_id, rev_id}
+
+      {:error, {doc_error, doc_id}} ->
+        {:error, doc_id, doc_err}
+
+      {:error, :db_not_found} ->
+        {:error, doc_id, :db_not_found}
+
+      _ ->
+        raise "unhandled message"
+    end
   end
 
   @doc """
@@ -77,21 +146,60 @@ defmodule Barrex.Document do
   local usage. It's used by the
   replication to store its state?
   """
+  @spec save_local(String.t(), String.t(), map) :: {atom, String.t() | atom}
   def save_local(barrel, doc_id, doc) do
-    :barrel.save_local_doc(barrel, doc_id, doc)
+    case :barrel.save_local_doc(barrel, doc_id, doc) do
+      :ok ->
+        {:ok, doc_id}
+
+      {:error, :db_not_found} ->
+        {:error, :db_not_found}
+
+      {:error, reason} ->
+        {:error, reason}
+
+      _ ->
+        raise "unhandled message"
+    end
   end
 
   @doc """
   Delete a local document.
   """
+  @spec delete_local(String.t(), String.t()) :: {atom, String.t() | atom}
   def delete_local(barrel, doc_id) do
-    :barrel.delete_local_doc(barrel, doc_id)
+    case :barrel.delete_local_doc(barrel, doc_id) do
+      :ok ->
+        {:ok, doc_id}
+
+      {:error, :db_not_found} ->
+        {:error, :db_not_found}
+
+      {:error, reason} ->
+        {:error, reason}
+
+      _ ->
+        raise "unhandled message"
+    end
   end
 
   @doc """
   Fetch a local document.
   """
+  @spec get_local(String.t(), String.t()) :: {atom, map | atom}
   def get_local(barrel, doc_id) do
-    :barrel.get_local_doc(barrel, doc_id)
+    case :barrel.get_local_doc(barrel, doc_id) do
+      {:ok, doc} when is_map(doc) ->
+        {:ok, doc}
+
+      {:error, :db_not_found} ->
+        {:error, :db_not_found}
+
+      {:error, reason} ->
+        {:error, reason}
+
+      _ ->
+        raise "unhandled message"
+    end
   end
 end
