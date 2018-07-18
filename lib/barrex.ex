@@ -3,16 +3,24 @@ defmodule Barrex do
   Documentation for Barrex.
   """
 
-  use Application
+  alias Barrex.Connection
 
-  def start(_app, _type) do
-    :ok = config()
-    {:ok, _} = Application.ensure_all_started(:barrel)
-    {:ok, _} = :barrel_store_sup.start_store(:default, :barrel_memory_storage, %{})
+  def start_link(opts \\ %{}) do
+    with :ok <- config(),
+         {:ok, _} <- Application.ensure_all_started(:barrel),
+         {:ok, _} <- :barrel_store_sup.start_store(:default, :barrel_memory_storage, %{}) do
+      opts
+      |> Connection.start_link()
+
+      # {:ok, spawn(fn _ -> :dummy end)}
+    end
+  end
+
+  def start(_app, _opts) do
+    start_link()
   end
 
   def stop(_app) do
-    # :ok = :barrel_store_sup.stop_store(:default)
     :ok = Application.stop(:barrel)
   end
 
