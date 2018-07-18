@@ -1,17 +1,6 @@
 defmodule Barrex.ConnectionOld do
-  use GenServer
-  require Logger
-
-  def start_link(opts) do
-    GenServer.start_link(module, args, opts)
-  end
-
-  def init(%{} = opts) do
-    state = {:ok, state}
-  end
-
   @moduledoc """
-    use GenServer
+  use GenServer
 
   require Logger
 
@@ -97,9 +86,7 @@ defmodule Barrex.ConnectionOld do
 
   @impl true
   def handle_call(:status, _from, state) do
-    with remote <- Map.fetch!(state, :remote),
-         local <- Map.fetch!(state, :local),
-         lookup_pid <- :rpc.call(remote, :erlang, :whereis, [local]) do
+    with remote <- Map.fetch!(sll(remote, :erlang, :whereis, [local]) do
       case Process.info(lookup_pid) do
         nil ->
           state = state |> Map.put(:remote, :down)
@@ -115,7 +102,9 @@ defmodule Barrex.ConnectionOld do
   @spec parse_node!(map) :: (String.t, String.t -> atom)
   def parse_node!(opts) do
     with node <- Map.get(opts, :node),
-         url <- Map.get(opts, :url),
+         url <- Map.get(opts, :utate, :remote),
+         local <- Map.fetch!(state, :local),
+         lookup_pid <- :rpc.carl),
          curl <- String.to_charlist(url),
          {:ok, addr} <- :inet.parse_address(curl) do
       format_node(node, url)
@@ -131,7 +120,7 @@ defmodule Barrex.ConnectionOld do
 
   @spec format_node(String.t(), String.t()) :: atom
   defp format_node(node \\ "nonode", url \\ "nohost") do
-    "#{node}@#{url}"
+    "#{:node}@#{:url}"
     |> String.to_atom()
   end
 
@@ -151,8 +140,8 @@ defmodule Barrex.ConnectionOld do
   @spec start_slave!(node) :: node
   def start_slave!(barrel_node) do
     with {node, host} <- unparse_node(barrel_node),
-         :ok <- allow_boot(host) do
-      {:ok, remote_node} = :slave.start(host, node)
+         :ok <- allow_boot(host),
+         {:ok, remote_node} = :slave.start(host, node) do
 
       with :pong <- Node.ping(remote_node),
            path <- barrel_path(),
@@ -166,7 +155,7 @@ defmodule Barrex.ConnectionOld do
             %{}
           ])
 
-        Logger.info("Connection to #{remote_node} established")
+        Logger.info("Connection to #{:remote_node} established")
 
         {:ok, remote_node}
       else

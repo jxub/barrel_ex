@@ -12,8 +12,7 @@ defmodule Barrex.Cursor do
   defstruct [:data]
 
   defimpl Enumerable do
-    defrecordp :state [:barrel, :limit, :cursor, :position]
-    end
+    defrecordp :state, barrel: nil, limit: nil, cursor: nil, position: 0
 
     def count(enum) do
       {:error, __MODULE__}
@@ -25,7 +24,7 @@ defmodule Barrex.Cursor do
 
     def reduce(%{barrel: barrel, limit: limit}, acc, reduce_fun) do
       start_fun = start_fun(barrel, limit)
-      next_fun = next_fun(barrel)
+      next_fun = next_fun(barrel, limit)
       after_fun = after_fun([])
       Stream.resource(start_fun, next_fun, after_fun)
     end
@@ -45,18 +44,20 @@ defmodule Barrex.Cursor do
       end
     end
 
-    defp next_fun(barrel, opts \\ []) do
-      case state.position >= limit or state.cursor |> Enum.at(state.position) |> is_nil() do
-        true ->
-          {:halt, state}
+    defp next_fun(barrel, limit, opts \\ %{}) do
+      #case state.position >= limit or state.cursor |> Enum.at(state.position) |> is_nil() do
+      #  true ->
+      #    {:halt, state(state)}
+      #  _ ->
+      #    nil
+      #end
+      with id <- state.cursor |> Enum.at(state.position) do
+        {:ok, doc} = Document.fetch(barrel, id, opts)
+        {doc, state(state, position: state.position+1)}
+      else
         _ ->
-          nil
+        {:halt, state(state)}
       end
-      with doc <- state.cursor |> Enum.at(state.position) do
-        
-      end
-      Document.find()
-      {:elem, acc}
     end
 
     defp after_fun(_opts) do

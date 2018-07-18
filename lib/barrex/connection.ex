@@ -33,7 +33,7 @@ defmodule Barrex.Connection do
   end
 
   def init(opts) when is_map(opts) do
-    with address <- Map.(opts, :address, "127.0.0.1"),
+    with address <- Map.get(opts, :address, "127.0.0.1"),
          port <- Map.get(opts, :port, 6000),
          options <- Map.get(opts, :options, []),
          state <- options |> parse_state() do
@@ -66,7 +66,7 @@ defmodule Barrex.Connection do
   end
 
   # TODO: implement also for other transports (GRPC)
-  defp connect(%State{} = state) when is_nil(state.sock) do
+  defp connect(%State{sock: nil} = state) do
     with opts <- [:binary, {:active, :once}, {:packet, 4}, {:header, 1}],
          connects <- Map.fetch!(state, :connects) do
       case :gen_tcp.connect(state.address, state.port, opts, state.connect_timeout) do
@@ -119,6 +119,10 @@ defmodule Barrex.Connection do
   end
 
   defp parse_state(opts) do
+    nil
+  end
+
+  defp deque_request(state) do
     nil
   end
 
