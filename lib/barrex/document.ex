@@ -4,6 +4,10 @@ defmodule Barrex.Document do
   creation, deletion, updates...
   """
 
+  @type ret :: %__MODULE__{}
+
+  defstruct data: nil
+
   @doc """
   Lookup a doc by its `doc_id`.
   """
@@ -39,17 +43,17 @@ defmodule Barrex.Document do
   - if the user try to replace a doc that has been deleted,
     a not_found error will be returned
   """
-  @spec save_one(String.t(), map) :: {atom, String.t(), String.t()}
+  @spec save_one(String.t(), map) :: {atom, term}
   def save_one(barrel, doc) do
     case :barrel.save_doc(barrel, doc) do
       {:ok, doc_id, rev_id} ->
         {:ok, doc_id, rev_id}
 
-      {:error, {doc_error, doc_id}} ->
-        {:error, doc_id, doc_err}
-
       {:error, :db_not_found} ->
-        {:error, doc_id, :db_not_found}
+        {:error, :db_not_found}
+
+      {:error, reason} ->
+        {:error, reason}
 
       _ ->
         raise "unhandled message"
@@ -67,11 +71,11 @@ defmodule Barrex.Document do
       {:ok, doc_id, rev_id} ->
         {:ok, doc_id, rev_id}
 
-      {:error, {doc_error, doc_id}} ->
-        {:error, doc_id, doc_err}
-
       {:error, :db_not_found} ->
         {:error, doc_id, :db_not_found}
+
+      {:error, {doc_error, doc_id}} ->
+        {:error, doc_id, doc_error}
 
       _ ->
         raise "unhandled message"
@@ -104,14 +108,17 @@ defmodule Barrex.Document do
   @spec save(String.t(), list(map)) :: list(any)
   def save(barrel, docs) do
     case :barrel.save_docs(barrel, docs) do
+      docs when is_list(docs) ->
+        docs
+
       {:ok, doc_id, rev_id} ->
         {:ok, doc_id, rev_id}
 
       {:error, {doc_error, doc_id}} ->
-        {:error, doc_id, doc_err}
+        {:error, doc_id, doc_error}
 
       {:error, :db_not_found} ->
-        {:error, doc_id, :db_not_found}
+        {:error, nil, :db_not_found}
 
       _ ->
         raise "unhandled message"
@@ -125,14 +132,17 @@ defmodule Barrex.Document do
   @spec delete(String.t(), list(String.t())) :: list(any)
   def delete(barrel, docs) do
     case :barrel.delete_docs(barrel, docs) do
+      docs when is_list(docs) ->
+        docs
+
       {:ok, doc_id, rev_id} ->
         {:ok, doc_id, rev_id}
 
       {:error, {doc_error, doc_id}} ->
-        {:error, doc_id, doc_err}
+        {:error, doc_id, doc_error}
 
       {:error, :db_not_found} ->
-        {:error, doc_id, :db_not_found}
+        {:error, nil, :db_not_found}
 
       _ ->
         raise "unhandled message"
@@ -146,7 +156,7 @@ defmodule Barrex.Document do
   local usage. It's used by the
   replication to store its state?
   """
-  @spec save_local(String.t(), String.t(), map) :: {atom, String.t() | atom}
+  @spec save_local(String.t(), String.t(), map) :: {atom, String.t() | atom | term}
   def save_local(barrel, doc_id, doc) do
     case :barrel.save_local_doc(barrel, doc_id, doc) do
       :ok ->
@@ -166,7 +176,7 @@ defmodule Barrex.Document do
   @doc """
   Delete a local document.
   """
-  @spec delete_local(String.t(), String.t()) :: {atom, String.t() | atom}
+  @spec delete_local(String.t(), String.t()) :: {atom, String.t() | atom | term}
   def delete_local(barrel, doc_id) do
     case :barrel.delete_local_doc(barrel, doc_id) do
       :ok ->
@@ -186,7 +196,7 @@ defmodule Barrex.Document do
   @doc """
   Fetch a local document.
   """
-  @spec get_local(String.t(), String.t()) :: {atom, map | atom}
+  @spec get_local(String.t(), String.t()) :: {atom, map | atom | term}
   def get_local(barrel, doc_id) do
     case :barrel.get_local_doc(barrel, doc_id) do
       {:ok, doc} when is_map(doc) ->
