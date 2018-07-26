@@ -1,4 +1,5 @@
 import Record
+
 defmodule Barrex.Cursor do
   alias Barrex.{
     Document,
@@ -45,18 +46,18 @@ defmodule Barrex.Cursor do
     end
 
     defp next_fun(barrel, limit, opts \\ %{}) do
-      #case state.position >= limit or state.cursor |> Enum.at(state.position) |> is_nil() do
+      # case state.position >= limit or state.cursor |> Enum.at(state.position) |> is_nil() do
       #  true ->
       #    {:halt, state(state)}
       #  _ ->
       #    nil
-      #end
+      # end
       with id <- state.cursor |> Enum.at(state.position) do
         {:ok, doc} = Document.fetch(barrel, id, opts)
-        {doc, state(state, position: state.position+1)}
+        {doc, state(state, position: state.position + 1)}
       else
         _ ->
-        {:halt, state(state)}
+          {:halt, state(state)}
       end
     end
 
