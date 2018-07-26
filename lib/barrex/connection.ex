@@ -10,7 +10,7 @@ defmodule Barrex.Connection do
               queue_if_disconnected: false,
               sock: nil,
               active: nil,
-              queue: nil,
+              queue: :queue.new(),
               connects: 0,
               failed: [],
               connect_timeout: 100_000_000,
@@ -26,17 +26,20 @@ defmodule Barrex.Connection do
               tref: nil
   end
 
-  def start_link(address, port, options \\ []) do
-    with args <- %{address: address, port: port, options: options} do
+  @doc """
+  Usage:
+
+  conn = Barrex.Connection.start_link("127.0.0.1", 6000)
+  """
+  @spec start_link(String.t(), integer, map | none) :: {atom, any}
+  def start_link(address, port, options \\ %{}) do
+    with args <- Map.new(address: address, port: port, options: options) do
       GenServer.start_link(__MODULE__, args)
     end
   end
 
   def init(opts) when is_map(opts) do
-    with address <- Map.get(opts, :address, "127.0.0.1"),
-         port <- Map.get(opts, :port, 6000),
-         options <- Map.get(opts, :options, []),
-         state <- options |> parse_state() do
+    with state <- opts |> parse_state() do
       case state.auto_reconnect do
         true ->
           send(self(), :reconnect)
@@ -47,7 +50,7 @@ defmodule Barrex.Connection do
               {:stop, {:tcp, reason}}
 
             {:ok, state} ->
-              :ok
+              {:ok, state}
           end
       end
     end
@@ -71,7 +74,10 @@ defmodule Barrex.Connection do
          connects <- Map.fetch!(state, :connects) do
       case :gen_tcp.connect(state.address, state.port, opts, state.connect_timeout) do
         {:ok, sock} ->
-          {:ok, %State{sock: sock, connects: connects + 1, reconnect_interval: 100}}
+          with state <-
+                 Map.merge(state, %{sock: sock, connects: connects + 1, reconnect_interval: 100}) do
+            {:ok, state}
+          end
 
         {:error, reason} ->
           {:error, reason}
@@ -119,11 +125,32 @@ defmodule Barrex.Connection do
   end
 
   defp parse_state(opts) do
-    nil
+    with address <- Keyword.get(opts, :address, "127.0.0.1"),
+         port <- Keyword.get(opts, :port, 6000),
+         options <- Keyword.get(opts, :options, %{}),
+         auto_reconnect = Keyword.get(options, :auto_reconnect),
+         queue_if_disconnected <- Keyword.get(options, :queue_if_disconnected),
+         connect_timeout <- Keyword.get(options, :connect_timeout),
+         reconnect_interval <- Keyword.get(options, :reconnect_interval) do
+      %State{
+        address: address,
+        port: port,
+        auto_reconnect: auto_reconnect,
+        queue_if_disconnected: queue_if_disconnected,
+        connect_timeout: connect_timeout,
+        reconnect_interval: reconnect_interval
+      }
+    end
   end
 
   defp deque_request(state) do
-    nil
+    case :queue.out(state.queue) do
+      {:empty, _} ->
+        state
+
+      {{:value, request}, queue2} ->
+        send_request(request, Map.merge(state, %{queue: queue2}))
+    end
   end
 
   defp send_caller(message, %Request{ctx: {req_id, client}, from: nil} = request) do
@@ -134,8 +161,55 @@ defmodule Barrex.Connection do
 
   defp send_caller(message, %Request{from: from} = request) when not is_nil(from) do
     GenServer.reply(from, message)
-    request |> Map.put(:from, nil)
 
     request
+    |> Map.put(:from, nil)
+
+    request
+  end
+
+  defp send_request(request, %State{active: nil} = state) do
+    with msg <- encode(request) do
+      case :gen_tcp.send(state.sock, msg) do
+        :ok ->
+          with state <- state |> Map.merge(%{active: request}) do
+            request
+            |> after_send(state)
+            |> maybe_reply()
+          end
+
+        {:error, :closed} ->
+          state
+          |> Map.fetch(:sock)
+          |> :gen_tcp.close()
+
+          with state <- state |> Map.merge(%{active: request}) do
+            request
+            |> maybe_enqueue_and_reconnect(state)
+          end
+      end
+    end
+  end
+
+  defp encode(_request) do
+    raise "not implemented"
+  end
+
+  defp maybe_reply({:noreply, state}), do: state
+
+  defp maybe_reply({:reply, reply, state}) do
+    with state <- Map.fetch!(state, :active),
+         request <- reply |> send_caller(state) do
+      state
+      |> Map.merge(%{active: request})
+    end
+  end
+
+  defp maybe_enqueue_and_reconnect(request, state) do
+    nil
+  end
+
+  defp after_send(_bla, _ble) do
+    nil
   end
 end
