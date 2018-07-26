@@ -5,19 +5,12 @@ defmodule Barrex do
 
   alias Barrex.Connection
 
-  def start_link(opts \\ %{}) do
+  def start_link(address \\ "127.0.0.1", port \\ 6000, opts \\ %{}) do
     with :ok <- config(),
          {:ok, _} <- Application.ensure_all_started(:barrel),
          {:ok, _} <- :barrel_store_sup.start_store(:default, :barrel_memory_storage, %{}) do
-      opts
-      |> Connection.start_link()
-
-      # {:ok, spawn(fn _ -> :dummy end)}
+      Connection.start_link(address, port, opts)
     end
-  end
-
-  def start(_app, _opts) do
-    start_link()
   end
 
   def stop(_app) do
