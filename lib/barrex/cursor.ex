@@ -1,4 +1,4 @@
-import Record
+require Record
 
 defmodule Barrex.Cursor do
   alias Barrex.{
@@ -8,12 +8,16 @@ defmodule Barrex.Cursor do
 
   # Client
 
-  @type t :: %__MODULE__{}
+  @type t :: %__MODULE__{
+          barrel: String.t(),
+          limit: integer(),
+          opts: Keyword.t()
+        }
 
-  defstruct [:data]
+  defstruct [:barrel, :limit, :opts]
 
   defimpl Enumerable do
-    defrecordp :state, barrel: nil, limit: nil, cursor: nil, position: 0
+    Record.defrecordp(:state, barrel: nil, limit: nil, cursor: nil, position: 0)
 
     def count(enum) do
       {:error, __MODULE__}
@@ -23,22 +27,21 @@ defmodule Barrex.Cursor do
       {:error, __MODULE__}
     end
 
-    def reduce(%{barrel: barrel, limit: limit}, acc, reduce_fun) do
+    def reduce(%{barrel: barrel, limit: limit, opts: opts}, acc, reduce_fun) do
       start_fun = start_fun(barrel, limit)
-      next_fun = next_fun(barrel, limit)
+      next_fun = next_fun(barrel, limit, opts)
       after_fun = after_fun([])
-      Stream.resource(start_fun, next_fun, after_fun)
+      Stream.resource(start_fun, next_fun, after_fun).(acc, reduce_fun)
     end
 
     def slice(enum) do
       {:error, __MODULE__}
     end
 
-    # TODO: make cursor /id independent
     defp start_fun(barrel, limit) do
-      case Index.query(barrel, "/id", fn doc, acc -> [doc["id"] | acc] end, [], %{}) do
+      case Index.ids(barrel) do
         {:ok, indexes} ->
-          state(barrel: barrel, limit: limit, cursor: indexes)
+          state(barrel: barrel, limit: limit, cursor: indexes, position: 0)
 
         {:error, reason} ->
           raise reason
@@ -46,18 +49,28 @@ defmodule Barrex.Cursor do
     end
 
     defp next_fun(barrel, limit, opts \\ %{}) do
-      # case state.position >= limit or state.cursor |> Enum.at(state.position) |> is_nil() do
-      #  true ->
-      #    {:halt, state(state)}
-      #  _ ->
-      #    nil
-      # end
       with id <- state.cursor |> Enum.at(state.position) do
-        {:ok, doc} = Document.fetch(barrel, id, opts)
-        {doc, state(state, position: state.position + 1)}
-      else
-        _ ->
+        if state.position > limit do
           {:halt, state(state)}
+        end
+
+        case id do
+          nil ->
+            {:halt, state(state)}
+
+          _ ->
+            fetch_next(id, barrel, limit, opts)
+        end
+      end
+    end
+
+    defp fetch_next(id, barrel, limit, opts) do
+      case Document.fetch(barrel, id, opts) do
+        {:ok, doc} ->
+          {doc, state(state, position: state.position + 1)}
+
+        {:error, reason} ->
+          raise reason
       end
     end
 
