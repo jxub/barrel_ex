@@ -1,10 +1,7 @@
 require Record
 
 defmodule Barrex.Cursor do
-  alias Barrex.{
-    Document,
-    Index
-  }
+  alias Barrex.Document
 
   # Client
 
@@ -39,7 +36,7 @@ defmodule Barrex.Cursor do
     end
 
     defp start_fun(barrel, limit) do
-      case Index.ids(barrel) do
+      case Document.ids(barrel) do
         {:ok, indexes} ->
           state(barrel: barrel, limit: limit, cursor: indexes, position: 0)
 

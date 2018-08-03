@@ -2,10 +2,15 @@ defmodule Barrex.Connection do
   use GenServer
 
   @max_reconnect_interval 1_000
+  @connect_timeout 1_000_000
+  @reconnect_interval 100
+
+  @address "127.0.0.1"
+  @port 6000
 
   defmodule State do
-    defstruct address: nil,
-              port: nil,
+    defstruct address: "127.0.0.1",
+              port: 6000,
               auto_reconnect: false,
               queue_if_disconnected: false,
               sock: nil,
@@ -13,7 +18,7 @@ defmodule Barrex.Connection do
               queue: :queue.new(),
               connects: 0,
               failed: [],
-              connect_timeout: 100_000_000,
+              connect_timeout: 1_000_000,
               reconnect_interval: 100
   end
 
@@ -29,10 +34,16 @@ defmodule Barrex.Connection do
   @doc """
   Usage:
 
-  conn = Barrex.Connection.start_link("127.0.0.1", 6000)
+  {:ok, conn} = Barrex.Connection.start_link("127.0.0.1", 6000)
   """
+
+  @spec start_link(list) :: any
+  def start_link(opts) do
+    start_link(@address, @port, %{})
+  end
+
   @spec start_link(String.t(), integer, map | none) :: {atom, any}
-  def start_link(address, port, options \\ %{}) do
+  def start_link(address \\ @address, port \\ @port, options \\ %{}) do
     with args <- Map.new(address: address, port: port, options: options) do
       GenServer.start_link(__MODULE__, args)
     end
@@ -40,7 +51,7 @@ defmodule Barrex.Connection do
 
   def init(opts) when is_map(opts) do
     with state <- opts |> parse_state() do
-      case state.auto_reconnect do
+      case state.auto_reconnect |> IO.inspect() do
         true ->
           send(self(), :reconnect)
 
@@ -70,9 +81,10 @@ defmodule Barrex.Connection do
 
   # TODO: implement also for other transports (GRPC)
   defp connect(%State{sock: nil} = state) do
-    with opts <- [:binary, {:active, :once}, {:packet, 4}, {:header, 1}],
-         connects <- Map.fetch!(state, :connects) do
-      case :gen_tcp.connect(state.address, state.port, opts, state.connect_timeout) do
+    with address <- state |> Map.fetch!(:address) |> String.to_charlist(),
+         opts <- [:binary, {:active, :once}, {:packet, 4}, {:header, 1}] |> IO.inspect(),
+         connects <- Map.fetch!(state, :connects) |> IO.inspect() do
+      case :gen_tcp.connect(address, state.port, opts, state.connect_timeout) do
         {:ok, sock} ->
           with state <-
                  Map.merge(state, %{sock: sock, connects: connects + 1, reconnect_interval: 100}) do
@@ -125,18 +137,19 @@ defmodule Barrex.Connection do
   end
 
   defp parse_state(opts) do
-    with address <- Keyword.get(opts, :address, "127.0.0.1"),
-         port <- Keyword.get(opts, :port, 6000),
-         options <- Keyword.get(opts, :options, %{}),
-         auto_reconnect = Keyword.get(options, :auto_reconnect),
-         queue_if_disconnected <- Keyword.get(options, :queue_if_disconnected),
-         connect_timeout <- Keyword.get(options, :connect_timeout),
-         reconnect_interval <- Keyword.get(options, :reconnect_interval) do
+    with address <- Map.get(opts, :address, @address) |> IO.inspect(),
+         port <- Map.get(opts, :port, @port) |> IO.inspect(),
+         options <- Map.get(opts, :options, %{}),
+         auto_reconnect = Map.get(options, :auto_reconnect, false),
+         queue_if_disconnected <- Map.get(options, :queue_if_disconnected, false),
+         connect_timeout <- Map.get(options, :connect_timeout, @connect_timeout),
+         reconnect_interval <- Map.get(options, :reconnect_interval, @reconnect_interval) do
       %State{
         address: address,
         port: port,
         auto_reconnect: auto_reconnect,
         queue_if_disconnected: queue_if_disconnected,
+        queue: :queue.new(),
         connect_timeout: connect_timeout,
         reconnect_interval: reconnect_interval
       }

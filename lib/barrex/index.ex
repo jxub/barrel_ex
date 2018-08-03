@@ -4,13 +4,12 @@ defmodule Barrex.Index do
   """
 
   @doc """
-  Query the barrel indexes.
-
-  TODO: try to track down the :barrel.query return values.
+  Fold the barrel documents.
+  TODO: check return spec
   """
-  @spec query(String.t(), String.t(), fun, any, map) :: {atom, list}
-  def query(barrel, path, fun, acc, opts) do
-    case :barrel.query(barrel, path, fun, acc, opts) do
+  @spec fold_docs(String.t(), String.t(), fun, any, map) :: {atom, list}
+  def fold_docs(barrel, path, fun, acc, opts) do
+    case :barrel.fold_docs(barrel, path, fun, acc, opts) do
       :ok ->
         {:ok, nil}
 
@@ -22,7 +21,28 @@ defmodule Barrex.Index do
     end
   end
 
+  @doc """
+  Get all document id's in a barrel.
+  TODO: move to documents?
+  """
   def ids(barrel) do
-    query(barrel, "/id", fn doc, acc -> {:ok, [doc["id"] | acc]} end, [], %{})
+    fold_docs(barrel, "/id", fn doc, acc -> {:ok, [doc["id"] | acc]} end, [], %{})
+  end
+
+  @doc """
+  Fold the barrel indexes.
+  """
+  @spec fold_path(String.t(), String.t(), fun, any, map) :: {atom, list}
+  def fold_path(barrel, path, fun, acc, opts) do
+    case :barrel.fold_path(barrel, path, fun, acc, opts) do
+      :ok ->
+        {:ok, nil}
+
+      {:error, reason} ->
+        {:error, reason}
+
+      resp ->
+        {:ok, resp}
+    end
   end
 end

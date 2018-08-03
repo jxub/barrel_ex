@@ -4,9 +4,18 @@ defmodule Barrex.Document do
   creation, deletion, updates...
   """
 
+  alias Barrex.Index
+
   @type ret :: %__MODULE__{}
 
   defstruct data: nil
+
+  @doc """
+  Get all document id's in a barrel.
+  """
+  def ids(barrel) do
+    Index.fold_docs(barrel, "/id", fn doc, acc -> {:ok, [doc["id"] | acc]} end, [], %{})
+  end
 
   @doc """
   Lookup a doc by its `doc_id`.

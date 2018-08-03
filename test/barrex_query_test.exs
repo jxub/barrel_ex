@@ -3,8 +3,7 @@ defmodule BarrexQueryTest do
 
   alias Barrex.{
     Database,
-    Document,
-    Index
+    Document
   }
 
   setup do
@@ -24,8 +23,7 @@ defmodule BarrexQueryTest do
            |> Enum.map(fn res -> res |> Tuple.to_list() |> Enum.at(1) end) do
       assert length(ids) == 40
 
-      with {:ok, all} <-
-             Index.query(dbname, "/id", fn doc, acc -> {:ok, [doc["id"] | acc]} end, [], %{}) do
+      with {:ok, all} <- Document.ids(dbname) do
         assert length(all) == 40
       end
     end
