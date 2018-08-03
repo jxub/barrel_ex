@@ -212,4 +212,8 @@ defmodule Barrex.Document do
         raise "unhandled message"
     end
   end
+
+  defmodule Local do
+    # TODO: move get_local and delete_local here?
+  end
 end
