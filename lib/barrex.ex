@@ -27,4 +27,6 @@ defmodule Barrex do
 
     :ok
   end
+
+  # TODO: defdelegates to document, database and index modules?
 end
