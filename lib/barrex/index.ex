@@ -22,14 +22,6 @@ defmodule Barrex.Index do
   end
 
   @doc """
-  Get all document id's in a barrel.
-  TODO: move to documents?
-  """
-  def ids(barrel) do
-    fold_docs(barrel, "/id", fn doc, acc -> {:ok, [doc["id"] | acc]} end, [], %{})
-  end
-
-  @doc """
   Fold the barrel indexes.
   """
   @spec fold_path(String.t(), String.t(), fun, any, map) :: {atom, list}
