@@ -9,26 +9,37 @@ defmodule Barrex.Connection do
   @port 6000
 
   defmodule State do
-    defstruct address: "127.0.0.1",
-              port: 6000,
-              auto_reconnect: false,
-              queue_if_disconnected: false,
-              sock: nil,
-              active: nil,
-              queue: :queue.new(),
-              connects: 0,
-              failed: [],
-              connect_timeout: 1_000_000,
-              reconnect_interval: 100
+    @type t :: %__MODULE__{
+            address: String.t(),
+            port: integer(),
+            auto_reconnect: boolean(),
+            queue_if_disconnected: boolean(),
+            sock: any(),
+            active: any(),
+            queue: tuple(),
+            connects: integer(),
+            failed: list(),
+            connect_timeout: integer(),
+            reconnect_interval: integer()
+          }
+
+    defstruct [
+      :address,
+      :port,
+      :auto_reconnect,
+      :queue_if_disconnected,
+      :sock,
+      :active,
+      :queue,
+      :connects,
+      :failed,
+      :connect_timeout,
+      :reconnect_interval
+    ]
   end
 
   defmodule Request do
-    defstruct ref: nil,
-              msg: nil,
-              from: nil,
-              ctx: nil,
-              timeout: nil,
-              tref: nil
+    defstruct [:ref, :msg, :from, :ctx, :timeout, :tref]
   end
 
   @doc """
@@ -149,7 +160,11 @@ defmodule Barrex.Connection do
         port: port,
         auto_reconnect: auto_reconnect,
         queue_if_disconnected: queue_if_disconnected,
+        sock: nil,
+        active: nil,
         queue: :queue.new(),
+        connects: 0,
+        failed: [],
         connect_timeout: connect_timeout,
         reconnect_interval: reconnect_interval
       }

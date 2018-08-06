@@ -3,25 +3,25 @@ defmodule Barrex.DatabaseInfo do
 
   ### CLIENT API
 
-  def start_link(opts) do
-    GenServer.start_link(__MODULE__, :ok, opts)
+  def start_link(args) do
+    GenServer.start_link(__MODULE__, args, name: :database_info)
   end
 
-  def add(pid, name) do
-    GenServer.call(pid, {:add, name})
+  def add(name) do
+    GenServer.call(:database_info, {:add, name})
   end
 
-  def delete(pid, name) do
-    GenServer.call(pid, {:delete, name})
+  def delete(name) do
+    GenServer.call(:database_info, {:delete, name})
   end
 
-  def show(pid) do
-    GenServer.call(pid, {:show})
+  def show do
+    GenServer.call(:database_info, {:show})
   end
 
   ### SERVER API
 
-  def init(:ok) do
+  def init(args) do
     {:ok, %{}}
   end
 

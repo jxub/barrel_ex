@@ -2,17 +2,18 @@ defmodule Barrex do
   @moduledoc """
   Documentation for Barrex. Meant to run under a Supervisor.
   """
-  use Application
+  # use Application
 
   alias Barrex.Connection
 
   def start_link(address, port, opts \\ %{}) do
     # TODO: maybe use start_link and add barrel in a supervision tree?
-    with :ok <- config(),
-         {:ok, _} <- Application.ensure_all_started(:barrel),
-         {:ok, _} <- :barrel_store_sup.start_store(:default, :barrel_memory_storage, %{}) do
-      Connection.start_link(address, port, opts)
-    end
+    # with :ok <- config(),
+    #      {:ok, _} <- Application.ensure_all_started(:barrel),
+    #      {:ok, _} <- :barrel_store_provider_sup.start_store(:default, :barrel_memory_storage, %{}) do
+    #   Connection.start_link(address, port, opts)
+    # end
+    Connection.start_link(address, port, opts)
   end
 
   def stop(_app) do

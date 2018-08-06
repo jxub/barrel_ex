@@ -1,10 +1,17 @@
 defmodule Barrex.App do
   use Application
 
+  alias Barrex.{
+    Connection,
+    DatabaseInfo
+  }
+
   def start(_type, opts) do
     IO.inspect(parse_conn_opts(opts))
+
     children = [
-      {Barrex.Connection, parse_conn_opts(opts)}
+      # {Connection, parse_conn_opts(opts)},
+      {DatabaseInfo, name: DatabaseInfo}
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)
