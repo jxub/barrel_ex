@@ -2,13 +2,22 @@ defmodule Barrex.Database do
   @moduledoc """
   Module for database creation, destruction and info.
   """
+  alias Barrex.DatabaseInfo
 
   defmodule Info do
     @moduledoc """
     Module for representing the Barrel
     database info return value.
     """
-    @type t :: __MODULE__
+    @type t :: %__MODULE__{
+            docs_count: any(),
+            id: any(),
+            indexed_seq: any(),
+            name: any(),
+            store: any(),
+            tab: any(),
+            updated_seq: any()
+          }
 
     defstruct [:docs_count, :id, :indexed_seq, :name, :store, :tab, :updated_seq]
   end
@@ -19,13 +28,40 @@ defmodule Barrex.Database do
     params for the child spec for the database supervisor.
     (http://erlang.org/doc/design_principles/sup_princ.html#child-specification)
     """
-    @type t :: __MODULE__
+    @type t :: %__MODULE__{
+            restart: any(),
+            shutdown: any(),
+            type: any(),
+            modules: any()
+          }
 
-    defstruct restart: nil, shutdown: nil, type: nil, modules: nil
+    defstruct [:restart, :shutdown, :type, :modules]
   end
 
   @doc """
-  Create a barrel, (note: for now the options is an empty map).
+  List all barrels in the default store.
+  """
+  @spec all() :: pid
+  def all do
+    with stores <- Application.fetch_env!(:barrel, :stores),
+         default <- stores |> Enum.at(0) |> Tuple.to_list() |> Enum.at(0),
+         store_pid <- :barrel_store_provider.get_provider(default) do
+        :barrel_store_provider.get_provider_barrels(store_pid)
+    end
+  end
+
+  @doc """
+  List all barrels in a given `store`.
+  """
+  @spec all(atom) :: pid
+  def all(store) do
+    with store_pid <- :barrel_store_provider.get_provider(store) do
+      :barrel_store_provider.get_provider_barrels(store_pid)
+    end
+  end
+
+  @doc """
+  Create a barrel, (note: for now options are an empty map).
   """
   @spec create(String.t()) :: {atom, atom}
   def create(name), do: create(name, %Options{})
@@ -35,6 +71,7 @@ defmodule Barrex.Database do
     with opts <- Map.from_struct(options) do
       case :barrel.create_barrel(name, opts) do
         :ok ->
+          DatabaseInfo.add(name)
           {:ok, :created}
 
         {:error, :already_exists} ->
@@ -51,7 +88,7 @@ defmodule Barrex.Database do
   """
   @spec delete(String.t()) :: {atom, atom}
   def delete(name) do
-    case :barrel.delete_barrel(name) do
+    case :barrel.drop_barrel(name) do
       :ok ->
         {:ok, :deleted}
 

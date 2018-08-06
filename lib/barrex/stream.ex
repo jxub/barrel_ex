@@ -59,16 +59,16 @@ defmodule Barrex.Stream do
   """
   @spec subscribe(stream()) :: {atom(), atom() | map(), map()}
   def subscribe(stream) do
-    with barrel = barrel(stream),
-         options = options(stream) do
+    with barrel <- barrel(stream),
+         options <- options(stream) do
       :barrel.subscribe_changes(barrel, options)
     end
   end
 
   @spec subscribe(stream(), pid()) :: {atom(), atom() | map(), map()}
   def subscribe(stream, pid) do
-    with barrel = barrel(stream),
-         options = options(stream) do
+    with barrel <- barrel(stream),
+         options <- options(stream) do
       :barrel.subscribe_changes(barrel, pid, options)
     end
   end
@@ -84,8 +84,8 @@ defmodule Barrex.Stream do
   """
   @spec subscribe(node(), stream(), pid()) :: {atom(), atom() | map(), map()}
   def subscribe(node, stream, pid) do
-    with barrel = barrel(stream),
-         options = options(stream) do
+    with barrel <- barrel(stream),
+         options <- options(stream) do
       :barrel.subscribe_changes(node, barrel, pid, options)
     end
   end

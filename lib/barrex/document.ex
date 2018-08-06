@@ -14,7 +14,7 @@ defmodule Barrex.Document do
   Get all document id's in a barrel.
   """
   def ids(barrel) do
-    Index.fold_docs(barrel, "/id", fn doc, acc -> {:ok, [doc["id"] | acc]} end, [], %{})
+    Index.fold_docs(barrel, fn doc, acc -> {:ok, [doc["id"] | acc]} end, [], %{})
   end
 
   @doc """
@@ -129,8 +129,18 @@ defmodule Barrex.Document do
       {:error, :db_not_found} ->
         {:error, nil, :db_not_found}
 
-      _ ->
-        raise "unhandled message"
+      res ->
+        IO.inspect "unhandled message"
+        res
+        """
+        _ =
+        {:ok,
+          [
+            {:ok, "9ZNE9gTBc22LjD0PD9",
+              "1-7ccde30003b6d6504a622cd9d2dc3a7cad9eee15fde252638ac813a2f4f0dd74"}
+          ]}
+
+        """
     end
   end
 
