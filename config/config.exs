@@ -28,3 +28,17 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+
+# config :stores, default: :barrel_memory_storage
+
+config :barrel,
+  vm_memory_high_watermark: 0.4,
+  disk_monitor_failure_retries: 10,
+  vm_memory_calculation_strategy: :rss,
+  disk_monitor_failure_retry_interval: 120000,
+  disk_free_limit: 50000000,
+  included_applications: [],
+  stores: [{:default, :barrel_memory_storage, %{}}],
+  data_dir: "data",
+  ts_file: "BARREL_TS"
+
