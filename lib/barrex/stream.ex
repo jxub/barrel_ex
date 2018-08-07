@@ -61,7 +61,7 @@ defmodule Barrex.Stream do
   def subscribe(stream) do
     with barrel <- barrel(stream),
          options <- options(stream) do
-      :barrel.subscribe_changes(barrel, options)
+      :barrel_replicate_api_wrapper.subscribe_changes(barrel, options)
     end
   end
 
@@ -69,7 +69,7 @@ defmodule Barrex.Stream do
   def subscribe(stream, pid) do
     with barrel <- barrel(stream),
          options <- options(stream) do
-      :barrel.subscribe_changes(barrel, pid, options)
+      :barrel_replicate_api_wrapper.subscribe_changes(barrel, pid, options)
     end
   end
 
@@ -86,7 +86,7 @@ defmodule Barrex.Stream do
   def subscribe(node, stream, pid) do
     with barrel <- barrel(stream),
          options <- options(stream) do
-      :barrel.subscribe_changes(node, barrel, pid, options)
+      :barrel_replicate_api_wrapper.subscribe_changes(node, barrel, pid, options)
     end
   end
 
@@ -97,7 +97,7 @@ defmodule Barrex.Stream do
   def unsubscribe(stream) do
     stream
     |> format()
-    |> :barrel.unsubscribe_change()
+    |> :barrel_replicate_api_wrapper.unsubscribe_change()
   end
 
   @doc """
@@ -107,7 +107,7 @@ defmodule Barrex.Stream do
   def unsubscribe(stream, pid) do
     stream
     |> format()
-    |> :barrel.unsubscribe_change(pid)
+    |> :barrel_replicate_api_wrapper.unsubscribe_change(pid)
   end
 
   @doc """
@@ -117,7 +117,7 @@ defmodule Barrex.Stream do
   @spec unsubscribe(node(), stream(), pid()) :: atom()
   def unsubscribe(node, stream, pid) do
     stream = stream |> format()
-    :barrel.unsubscribe_change(node, stream, pid)
+    :barrel_replicate_api_wrapper.unsubscribe_change(node, stream, pid)
   end
 
   defp format(stream) do

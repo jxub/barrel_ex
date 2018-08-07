@@ -13,6 +13,7 @@ defmodule BarrexStreamsTest do
     %{dbname: "testdb"}
   end
 
+  @tag :deprecated
   test "basic stream implementation", %{dbname: dbname} do
     Database.delete(dbname)
     assert {:ok, :created} == Database.create(dbname)

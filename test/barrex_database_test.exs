@@ -12,8 +12,9 @@ defmodule BarrexDatabaseTest do
 
   test "create a new database", dbs do
     Database.delete(dbs.db)
+
     case Database.create(dbs.db) do
-      :ok ->
+      {:ok, :created} ->
         :ok
 
       other ->
@@ -23,7 +24,10 @@ defmodule BarrexDatabaseTest do
 
   test "create an existing database", dbs do
     Database.delete(dbs.db)
-    :ok = Database.create(dbs.db)
+
+    # TODO: discuss if this return tuple makes sense
+    {:ok, :created} = Database.create(dbs.db)
+
     case Database.create(dbs.db) do
       {:error, :already_exists} ->
         :ok
@@ -35,6 +39,7 @@ defmodule BarrexDatabaseTest do
 
   test "delete a not existing database", dbs do
     Database.delete(dbs.db)
+
     case Database.delete(dbs.db) do
       {:error, :not_found} ->
         :ok
@@ -46,6 +51,7 @@ defmodule BarrexDatabaseTest do
 
   test "delete an existing database", dbs do
     Database.create(dbs.db)
+
     case Database.delete(dbs.db) do
       {:ok, :deleted} ->
         :ok
@@ -57,13 +63,14 @@ defmodule BarrexDatabaseTest do
 
   test "get information about an existing database", dbs do
     Database.create(dbs.db)
+
     case Database.info(dbs.db) do
       {:error, :not_found} ->
         :ok
 
-      {:ok. info} when is_map(info) ->
+      {:ok, info} when is_map(info) ->
         :ok
-      
+
       other ->
         raise other
     end
@@ -71,6 +78,7 @@ defmodule BarrexDatabaseTest do
 
   test "get information about a not found database", dbs do
     Database.delete(dbs.db)
+
     case Database.info(dbs.db) do
       {:error, :not_found} ->
         :ok

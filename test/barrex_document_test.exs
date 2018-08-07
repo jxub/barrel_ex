@@ -1,4 +1,4 @@
-defmodule BarrexQueryTest do
+defmodule BarrexDocumentTest do
   use ExUnit.Case
 
   alias Barrex.{
