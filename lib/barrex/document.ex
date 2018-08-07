@@ -6,9 +6,77 @@ defmodule Barrex.Document do
 
   alias Barrex.Index
 
-  @type ret :: %__MODULE__{}
+  @type barrel :: String.t()
 
-  defstruct data: nil
+  @type doc :: map()
+
+  @type doc_id :: String.t()
+
+  @type rev_id :: String.t()
+
+  @type doc_or_docs_rev_id :: [doc | {doc_id | rev_id}]
+
+  @type status :: :ok | :error
+
+  @type fetch_one_opts :: %{
+          history: boolean(),
+          max_history: non_neg_integer(),
+          rev: rev_id(),
+          ancestors: [rev_id()]
+        }
+
+  @type fetch_one_result :: {
+          status,
+          map() | :not_found | term()
+        }
+
+  @type fetch_opts :: %{
+          history: boolean(),
+          max_history: non_neg_integer(),
+          rev: rev_id(),
+          ancestors: [rev_id()],
+          timeout: non_neg_integer()
+        }
+
+  @type fetch_results :: {
+          status,
+          [fetch_one_result] | :timeout
+        }
+
+  @type doc_error :: {:conflict, :revision_conflict | :doc_exists}
+
+  @type db_error :: :db_not_found
+
+  @type save_opts :: %{
+          all_or_nothing: boolean()
+        }
+
+  @type save_one_result ::
+          {:ok, doc_id, rev_id}
+          | {:error, doc_error}
+          | {:error, db_error}
+
+  @type save_results :: {
+          :ok,
+          [save_one_result]
+        }
+
+  @type delete_one_result ::
+          {:ok, doc_id, rev_id}
+          | {:error, doc_error}
+          | {:error, db_error}
+
+  @type delete_results :: {
+          :ok,
+          [delete_one_result]
+        }
+
+  @type purge_one_result :: :ok | {:error, term()}
+
+  @type purge_results :: {
+          :ok,
+          [purge_one_result]
+        }
 
   @doc """
   Get all document id's in a barrel.
@@ -18,10 +86,10 @@ defmodule Barrex.Document do
   end
 
   @doc """
-  Lookup a doc by its `doc_id`.
+  Lookup one doc by its `doc_id` with aditional options.
   """
-  @spec fetch(String.t(), String.t(), map) :: {atom, map | atom}
-  def fetch(barrel, doc_id, opts \\ %{}) do
+  @spec fetch_one(barrel, doc_id, fetch_one_opts) :: fetch_result
+  def fetch_one(barrel, doc_id, opts \\ %{}) do
     case :barrel.fetch_doc(barrel, doc_id, opts) do
       {:ok, doc} when is_map(doc) ->
         {:ok, doc}
@@ -31,9 +99,25 @@ defmodule Barrex.Document do
 
       {:error, reason} ->
         {:error, reason}
+    end
+  end
 
-      _ ->
-        raise "unhandled message"
+  @doc """
+  Lookup multiple docs by their `doc_ids`. Options can be applied.
+  """
+  @spec fetch(barrel, [doc_id], fetch_opts) :: fetch_results
+  def fetch(barrel, doc_ids, opts \\ %{}) do
+    case :barrel.fetch_docs(barrel, doc_ids, opts) do
+      {:ok, docs} when is_list(docs) ->
+        # one/many/all documents may still be missing
+        {:ok, docs}
+
+      {:error, :not_found} ->
+        # database doesn't exist
+        {:error, :not_found}
+
+      {:error, reason} ->
+        {:error, reason}
     end
   end
 
@@ -52,7 +136,7 @@ defmodule Barrex.Document do
   - if the user try to replace a doc that has been deleted,
     a not_found error will be returned
   """
-  @spec save_one(String.t(), map) :: {atom, term}
+  @spec save_one(barrel, doc) :: save_one_result
   def save_one(barrel, doc) do
     case :barrel.save_doc(barrel, doc) do
       {:ok, doc_id, rev_id} ->
@@ -63,10 +147,16 @@ defmodule Barrex.Document do
 
       {:error, reason} ->
         {:error, reason}
-
-      _ ->
-        raise "unhandled message"
     end
+  end
+
+  @doc """
+  Create or replace multiple documents. Also, options are possible.
+  """
+  @spec save(barrel, [doc], save_opts) :: save_results
+  def save(barrel, docs, options \\ %{}) do
+    # returns a list, pattern match makes little sense
+    :barrel.save_docs(barrel, docs, options)
   end
 
   @doc """
@@ -74,99 +164,63 @@ defmodule Barrex.Document do
   from the filesystem but instead create a tombstone
   that allows barrel to replicate a deletion.
   """
-  @spec delete_one(String.t(), String.t(), String.t()) :: {atom, String.t(), String.t() | atom}
+  @spec delete_one(barrel, doc_id, rev_id) :: delete_one_result
   def delete_one(barrel, doc_id, rev_id) do
     case :barrel.delete_doc(barrel, doc_id, rev_id) do
       {:ok, doc_id, rev_id} ->
         {:ok, doc_id, rev_id}
 
+      {:error, doc_error} ->
+        {:error, doc_error}
+
       {:error, :db_not_found} ->
         {:error, doc_id, :db_not_found}
-
-      {:error, {doc_error, doc_id}} ->
-        {:error, doc_id, doc_error}
-
-      _ ->
-        raise "unhandled message"
     end
   end
 
   @doc """
-  Selete a document from the filesystem.
+  Delete multiple documents as specified in the 
+  list of document revision ids or documents themselves.
+  Allows barrel to replicate all deletions.
+  """
+  @spec delete(barrel, doc_or_docs_rev_id) :: delete_results
+  def delete(barrel, doc_or_docs_rev_id) do
+    # returns a list, pattern match makes little sense
+    :barrel.delete_docs(barrel, doc_or_docs_rev_id)
+  end
+
+  @doc """
+  Delete a document from the filesystem.
   This deletes completely the document locally.
   The deletion won't be replicated and
   will not crete an event.
   """
-  @spec purge(String.t(), String.t()) :: {atom, String.t() | atom}
-  def purge(barrel, doc_id) do
+  @spec purge_one(barrel, doc_id) :: purge_one_result
+  def purge_one(barrel, doc_id) do
     case :barrel.purge_doc(barrel, doc_id) do
       :ok ->
         {:ok, doc_id}
 
       {:error, reason} ->
         {:error, reason}
-
-      _ ->
-        raise "unhandled message"
     end
   end
 
   @doc """
-  Like save_doc but create or replace multiple docs at once.
+  Same as purge, but for multiple documents.
   """
-  @spec save(String.t(), list(map)) :: list(any)
-  def save(barrel, docs) do
-    case :barrel.save_docs(barrel, docs) do
-      docs when is_list(docs) ->
-        docs
-
-      {:ok, doc_id, rev_id} ->
-        {:ok, doc_id, rev_id}
-
-      {:error, {doc_error, doc_id}} ->
-        {:error, doc_id, doc_error}
-
-      {:error, :db_not_found} ->
-        {:error, nil, :db_not_found}
-
-      res ->
-        IO.inspect "unhandled message"
-        res
-        """
-        _ =
-        {:ok,
-          [
-            {:ok, "9ZNE9gTBc22LjD0PD9",
-              "1-7ccde30003b6d6504a622cd9d2dc3a7cad9eee15fde252638ac813a2f4f0dd74"}
-          ]}
-
-        """
+  @spec purge(barrel, [doc_id]) :: purge_results
+  def purge(barrel, doc_ids) do
+    with purge_results <-
+           doc_ids
+           |> Enum.map(fn doc_id ->
+             purge_one(barrel, doc_id)
+           end) do
+      {:ok, purge_results}
     end
   end
 
-  @doc """
-  Delete multiple docs. `docs` can be a list
-  of `doc_id` or `rev_id`
-  """
-  @spec delete(String.t(), list(String.t())) :: list(any)
-  def delete(barrel, docs) do
-    case :barrel.delete_docs(barrel, docs) do
-      docs when is_list(docs) ->
-        docs
-
-      {:ok, doc_id, rev_id} ->
-        {:ok, doc_id, rev_id}
-
-      {:error, {doc_error, doc_id}} ->
-        {:error, doc_id, doc_error}
-
-      {:error, :db_not_found} ->
-        {:error, nil, :db_not_found}
-
-      _ ->
-        raise "unhandled message"
-    end
-  end
+  ## LOCAL OPERATIONS: DEPRECATED
 
   @doc """
   Create or replace a local document.
@@ -174,6 +228,8 @@ defmodule Barrex.Document do
   replicated. It's generally intented for
   local usage. It's used by the
   replication to store its state?
+
+  TODO: deprecated
   """
   @spec save_local(String.t(), String.t(), map) :: {atom, String.t() | atom | term}
   def save_local(barrel, doc_id, doc) do
@@ -194,6 +250,8 @@ defmodule Barrex.Document do
 
   @doc """
   Delete a local document.
+
+  TODO: deprecated
   """
   @spec delete_local(String.t(), String.t()) :: {atom, String.t() | atom | term}
   def delete_local(barrel, doc_id) do
@@ -214,6 +272,8 @@ defmodule Barrex.Document do
 
   @doc """
   Fetch a local document.
+
+  TODO: deprecated
   """
   @spec get_local(String.t(), String.t()) :: {atom, map | atom | term}
   def get_local(barrel, doc_id) do
@@ -230,9 +290,5 @@ defmodule Barrex.Document do
       _ ->
         raise "unhandled message"
     end
-  end
-
-  defmodule Local do
-    # TODO: move get_local and delete_local here?
   end
 end
