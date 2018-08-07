@@ -20,6 +20,8 @@ defmodule BarrexDocumentTest do
          resps <- Document.save(dbname, docs),
          ids <-
            resps
+           |> Tuple.to_list()
+           |> Enum.at(1)
            |> Enum.map(fn res -> res |> Tuple.to_list() |> Enum.at(1) end) do
       assert length(ids) == 40
 

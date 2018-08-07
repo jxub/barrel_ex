@@ -88,7 +88,7 @@ defmodule Barrex.Document do
   @doc """
   Lookup one doc by its `doc_id` with aditional options.
   """
-  @spec fetch_one(barrel, doc_id, fetch_one_opts) :: fetch_result
+  @spec fetch_one(barrel, doc_id, fetch_one_opts) :: fetch_one_result
   def fetch_one(barrel, doc_id, opts \\ %{}) do
     case :barrel.fetch_doc(barrel, doc_id, opts) do
       {:ok, doc} when is_map(doc) ->
