@@ -9,7 +9,7 @@ defmodule BarrexStreamsTest do
 
   setup do
     Application.ensure_all_started(:barrel)
-    :barrel_store_sup.start_store(:default, :barrel_memory_storage, %{})
+    # TODO: delete :barrel_store_sup.start_store(:default, :barrel_memory_storage, %{})
     %{dbname: "testdb"}
   end
 

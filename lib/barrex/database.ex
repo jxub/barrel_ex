@@ -40,18 +40,22 @@ defmodule Barrex.Database do
 
   @doc """
   List all barrels in the default store.
+
+  TODO: reimplement after store changes.
   """
   @spec all() :: pid
   def all do
     with stores <- Application.fetch_env!(:barrel, :stores),
          default <- stores |> Enum.at(0) |> Tuple.to_list() |> Enum.at(0),
          store_pid <- :barrel_store_provider.get_provider(default) do
-        :barrel_store_provider.get_provider_barrels(store_pid)
+      :barrel_store_provider.get_provider_barrels(store_pid)
     end
   end
 
   @doc """
   List all barrels in a given `store`.
+
+  TODO: reimplement after store changes.
   """
   @spec all(atom) :: pid
   def all(store) do
@@ -64,7 +68,9 @@ defmodule Barrex.Database do
   Create a barrel, (note: for now options are an empty map).
   """
   @spec create(String.t()) :: {atom, atom}
-  def create(name), do: create(name, %Options{})
+  def create(name) do
+    create(name, %Options{})
+  end
 
   @spec create(String.t(), map | none) :: {atom, atom}
   def create(name, %Options{} = options) do
