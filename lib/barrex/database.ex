@@ -4,6 +4,14 @@ defmodule Barrex.Database do
   """
   alias Barrex.DatabaseInfo
 
+  @type barrel :: String.t()
+
+  @type store :: atom()
+
+  @type status :: atom()
+
+  @type message :: atom() | Info.t()
+
   defmodule Info do
     @moduledoc """
     Module for representing the Barrel
@@ -57,7 +65,7 @@ defmodule Barrex.Database do
 
   TODO: reimplement after store changes.
   """
-  @spec all(atom) :: pid
+  @spec all(store) :: pid
   def all(store) do
     with store_pid <- :barrel_store_provider.get_provider(store) do
       :barrel_store_provider.get_provider_barrels(store_pid)
@@ -67,12 +75,12 @@ defmodule Barrex.Database do
   @doc """
   Create a barrel, (note: for now options are an empty map).
   """
-  @spec create(String.t()) :: {atom, atom}
+  @spec create(barrel) :: {status, message}
   def create(name) do
     create(name, %Options{})
   end
 
-  @spec create(String.t(), map | none) :: {atom, atom}
+  @spec create(barrel, Options.t() | none) :: {status, message}
   def create(name, %Options{} = options) do
     with opts <- Map.from_struct(options) do
       case :barrel.create_barrel(name, opts) do
@@ -92,7 +100,7 @@ defmodule Barrex.Database do
   @doc """
   Delete a barrel.
   """
-  @spec delete(String.t()) :: {atom, atom}
+  @spec delete(barrel) :: {status, message}
   def delete(name) do
     case :barrel.drop_barrel(name) do
       :ok ->
@@ -118,14 +126,17 @@ defmodule Barrex.Database do
       updated_seq: 0
     }
   """
-  @spec info(String.t()) :: {atom, atom | Info.t()}
+  @spec info(barrel) :: {status, message}
   def info(name) do
     case :barrel.barrel_infos(name) do
       {:error, reason} ->
         {:error, reason}
 
       db_info when is_map(db_info) ->
-        {:ok, db_info}
+        with info <- db_info |> Map.to_list(),
+             info2 <- struct!(Info, info) do
+          {:ok, info2}
+        end
     end
   end
 end
