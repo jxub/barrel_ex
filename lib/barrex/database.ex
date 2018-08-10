@@ -19,6 +19,7 @@ defmodule Barrex.Database do
     """
     @type t :: %__MODULE__{
             docs_count: any(),
+            del_docs_count: any(),
             id: any(),
             indexed_seq: any(),
             name: any(),
@@ -27,7 +28,7 @@ defmodule Barrex.Database do
             updated_seq: any()
           }
 
-    defstruct [:docs_count, :id, :indexed_seq, :name, :store, :tab, :updated_seq]
+    defstruct [:docs_count, :del_docs_count, :id, :indexed_seq, :name, :store, :tab, :updated_seq]
   end
 
   defmodule Options do

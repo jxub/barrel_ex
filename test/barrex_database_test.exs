@@ -2,7 +2,8 @@ defmodule BarrexDatabaseTest do
   use ExUnit.Case
 
   alias Barrex.{
-    Database
+    Database,
+    Database.Info
   }
 
   setup do
@@ -68,13 +69,13 @@ defmodule BarrexDatabaseTest do
       {:error, :not_found} ->
         :ok
 
-      {:ok, info} when is_map(info) ->
-        :ok
+      {:ok, info} ->
+        is_info(info)
 
       other ->
         raise other
     end
-  end
+  end 
 
   test "get information about a not found database", dbs do
     Database.delete(dbs.db)
@@ -87,4 +88,7 @@ defmodule BarrexDatabaseTest do
         raise other
     end
   end
+
+  defp is_info(%Info{}), do: :ok
+  defp is_info(_), do: raise("not a info struct")
 end
