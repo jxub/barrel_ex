@@ -1,6 +1,6 @@
 require Record
 
-defmodule Barrel.CursorFind do
+defmodule Barrel.Cursor do
   @moduledoc """
   query:
 
@@ -22,25 +22,22 @@ defmodule Barrel.CursorFind do
   %{
     limit: 10
   }
-  
+
   """
 
   @type barrel :: String.t()
-  
 
   @type t :: %{
-    barrel: barrel,
-    query: %{optional(any()) => any()},
-    proj: %{optional(any()) => boolean() | integer()},
-    opts: %{optional(atom()) => any()}
-  }
+          barrel: barrel,
+          query: %{optional(any()) => any()},
+          proj: %{optional(any()) => boolean() | integer()},
+          opts: %{optional(atom()) => any()}
+        }
 
-  defstruct [
-    :barrel,
-    :query,
-    :proj,
-    :opts
-  ]
+  defstruct barrel: nil,
+            query: %{},
+            proj: %{},
+            opts: %{}
 
   defimpl Enumerable do
     alias Barrel.{
@@ -81,22 +78,38 @@ defmodule Barrel.CursorFind do
         # additional opts to be added here and passed to state eventually
         # batch_size = opts[:batch_size]
 
-        # prioritize :id in query to use also to find one doc
-        ids = if query[:id], do: [query.id], else: query[:ids]
-
-        case Map.fetch(query, :ids) do
-          {:ok, ids} ->
-              state(ids: ids, limit: limit)
-
-          :error ->
+        case get_id_or_ids(query) do
+          nil ->
+            # get all document id's if no id's supplied
             case Document.ids(barrel) do
               {:ok, ids} ->
-                state(ids: ids, limit: limit)
+                state(ids: ids, limit: limit) |> IO.inspect
 
               {:error, reason} ->
                 raise reason
             end
+
+          id_or_ids ->
+            state(ids: id_or_ids, limit: limit) |> IO.inspect
         end
+      end
+    end
+
+    @spec get_id_or_ids(map()) :: list()
+    defp get_id_or_ids(query) do
+      # prioritize :id in query to use also to find one doc
+      case query[:id] do
+        nil ->
+          case query[:ids] do
+            nil ->
+              nil
+
+            ids ->
+              ids
+          end
+
+        id ->
+          [id]
       end
     end
 
@@ -104,7 +117,7 @@ defmodule Barrel.CursorFind do
     The limit is decreased after a succesfully returned document, while
     the ids are updated after succesfully fetching the document.
     """
-    def next_fun(barrel, query, proj) do
+    defp next_fun(barrel, query, proj) do
       fn
         state(limit: 0) = state ->
           {:halt, state}
@@ -120,14 +133,17 @@ defmodule Barrel.CursorFind do
                 case satisfies_query(doc, query) do
                   true ->
                     with projected_doc <- satisfies_proj(doc, proj) do
-                      {[projected_doc], state(state, limit: limit - 1)}
+                      {[projected_doc], state(state, limit: update_limit(limit))}
                     end
 
                   false ->
                     with empty_doc <- Map.new() do
-                      {[empty_doc], state(state, limit: limit - 1)}
+                      {[empty_doc], state(state, limit: update_limit(limit))}
                     end
                 end
+
+              {:error, :not_found} ->
+                raise "document with the given ID not found"
 
               {:error, reason} ->
                 raise reason
@@ -137,22 +153,37 @@ defmodule Barrel.CursorFind do
     end
 
     @doc """
-    In future, after remote connection, close it here.
+    If there is no limit set, do not decrement it.
+    """
+    defp update_limit(limit) do
+      case limit do
+        nil -> nil
+        l when is_integer(l) -> l - 1
+      end
+    end
+
+    @doc """
+    In the future, after remote connection is implemented in barrel,
+    close it here.
     """
     defp after_fun(_) do
-      fn state(state) ->
-        :ok
+      fn
+        state(state) ->
+          :ok
+        res ->
+          IO.inspect(res)
+          :ok
       end
     end
 
     @spec satisfies_query(map, none()) :: boolean()
     defp satisfies_query(doc, nil), do: true
 
-    @spec satisfies_query(map, Keyword.t()) :: boolean()
+    @spec satisfies_query(map, map) :: boolean()
     defp satisfies_query(doc, query) do
-      with query_keys <- Keyword.keys(query),
+      with query_keys <- Map.keys(query),
            # all doc keys that are affected by query keys
-           doc_keys <- Keyword.take(doc, query_keys) do
+           doc_keys <- Map.take(doc, query_keys) do
         for k <- doc_keys do
           if doc_keys[k] != query_keys[k] do
             # TODO: add more rule-matching queries with $gt and $lt,...

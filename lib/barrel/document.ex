@@ -295,18 +295,24 @@ defmodule Barrel.Document do
   """
   @spec get_local(String.t(), String.t()) :: {atom, map | atom | term}
   def get_local(barrel, doc_id) do
-    case :barrel.get_local_doc(barrel, doc_id) do
-      {:ok, doc} when is_map(doc) ->
-        {:ok, doc}
+    with local_id <- make_local_id(doc_id) do
+      case :barrel.fetch_doc(barrel, doc_id) do
+        {:ok, doc} when is_map(doc) ->
+          {:ok, doc}
 
-      {:error, :db_not_found} ->
-        {:error, :db_not_found}
+        {:error, :db_not_found} ->
+          {:error, :db_not_found}
 
-      {:error, reason} ->
-        {:error, reason}
+        {:error, reason} ->
+          {:error, reason}
 
-      _ ->
-        raise "unhandled message"
+        _ ->
+          raise "unhandled message"
+      end
     end
+  end
+
+  defp make_local_id(id) do
+    "_local/" <> id
   end
 end

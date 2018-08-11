@@ -1,6 +1,6 @@
 require Record
 
-defmodule Barrel.Cursor do
+defmodule Barrel.CursorOld do
   alias Barrel.Document
 
   # Client
