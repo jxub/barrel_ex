@@ -1,6 +1,9 @@
-defmodule Barrex.Stream do
+defmodule Barrel.Stream do
   @moduledoc """
   Module for streams.
+
+  INFO: Deprecated at the moment as Barrel API changed on
+  the store branch which barrel_ex is based on.
 
   Usage:
 

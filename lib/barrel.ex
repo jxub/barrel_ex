@@ -1,10 +1,10 @@
-defmodule Barrex do
+defmodule Barrel do
   @moduledoc """
-  Documentation for Barrex. Meant to run under a Supervisor.
+  Documentation for Barrel. Meant to run under a Supervisor.
   """
   # use Application
 
-  alias Barrex.Connection
+  alias Barrel.Connection
 
   def start_link(address, port, opts \\ %{}) do
     # TODO: maybe use start_link and add barrel in a supervision tree?

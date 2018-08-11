@@ -1,4 +1,4 @@
-# Barrex
+# Barrel
 
 ## Elixir bindings for BarrelDB
 
@@ -18,7 +18,7 @@ And use as you wish:
 ```elixir
 defmodule Users do
   
-  alias BarrelEx.{
+  alias Barrel.{
     Database,
     Document
   }
@@ -36,7 +36,7 @@ For more usage examples, have a look at the tests.
 
 ## Development
 
-Get the code for BarrelEx:
+Get the code for Barrel:
 
 ```bash
 $ git clone https://gitlab.com/barrel-db/Clients/barrel_ex
@@ -65,7 +65,7 @@ by adding `barrex` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:barrex, "~> 0.1.0"}
+    {:barrel_ex, "~> 0.1.0"}
   ]
 end
 ```

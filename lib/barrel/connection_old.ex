@@ -1,4 +1,4 @@
-defmodule Barrex.ConnectionOld do
+defmodule Barrel.ConnectionOld do
   @moduledoc """
   use GenServer
 

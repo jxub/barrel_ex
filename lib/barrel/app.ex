@@ -1,7 +1,7 @@
-defmodule Barrex.App do
+defmodule Barrel.App do
   use Application
 
-  alias Barrex.{
+  alias Barrel.{
     Connection,
     DatabaseInfo
   }

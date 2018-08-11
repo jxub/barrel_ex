@@ -1,7 +1,7 @@
-defmodule BarrexStreamsTest do
+defmodule BarrelStreamsTest do
   use ExUnit.Case
 
-  alias Barrex.{
+  alias Barrel.{
     Database,
     Document,
     Stream

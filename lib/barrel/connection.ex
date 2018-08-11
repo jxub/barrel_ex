@@ -1,4 +1,4 @@
-defmodule Barrex.Connection do
+defmodule Barrel.Connection do
   use GenServer
 
   @max_reconnect_interval 1_000
@@ -45,7 +45,7 @@ defmodule Barrex.Connection do
   @doc """
   Usage:
 
-  {:ok, conn} = Barrex.Connection.start_link("127.0.0.1", 6000)
+  {:ok, conn} = Barrel.Connection.start_link("127.0.0.1", 6000)
   """
 
   @spec start_link(list) :: any

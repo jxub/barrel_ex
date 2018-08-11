@@ -1,8 +1,8 @@
-defmodule Barrex.Database do
+defmodule Barrel.Database do
   @moduledoc """
   Module for database creation, destruction and info.
   """
-  alias Barrex.DatabaseInfo
+  alias Barrel.DatabaseInfo
 
   @type barrel :: String.t()
 
@@ -128,8 +128,8 @@ defmodule Barrex.Database do
     }
   """
   @spec info(barrel) :: {status, message}
-  def info(name) do
-    case :barrel.barrel_infos(name) do
+  def info(barrel) do
+    case :barrel.barrel_infos(barrel) do
       {:error, reason} ->
         {:error, reason}
 
@@ -138,6 +138,17 @@ defmodule Barrex.Database do
              info2 <- struct!(Info, info) do
           {:ok, info2}
         end
+    end
+  end
+
+  @spec exists?(barrel) :: boolean()
+  def exists?(barrel) do
+    case info(barrel) do
+      {:ok, _info} ->
+        true
+
+      {:error, :not_found} ->
+        false
     end
   end
 end

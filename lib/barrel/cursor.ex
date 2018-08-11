@@ -1,7 +1,7 @@
 require Record
 
-defmodule Barrex.Cursor do
-  alias Barrex.Document
+defmodule Barrel.Cursor do
+  alias Barrel.Document
 
   # Client
 

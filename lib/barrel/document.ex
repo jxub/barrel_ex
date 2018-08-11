@@ -1,10 +1,10 @@
-defmodule Barrex.Document do
+defmodule Barrel.Document do
   @moduledoc """
   Module to interact with barrel documents and its
   creation, deletion, updates...
   """
 
-  alias Barrex.Index
+  alias Barrel.Index
 
   @type barrel :: String.t()
 
@@ -43,7 +43,14 @@ defmodule Barrex.Document do
           [fetch_one_result] | :timeout
         }
 
+  @type ids_results :: {
+          status,
+          [doc_id] | doc_na
+        }
+
   @type doc_error :: {:conflict, :revision_conflict | :doc_exists}
+
+  @type doc_na :: :not_found
 
   @type db_error :: :db_not_found
 
@@ -71,7 +78,7 @@ defmodule Barrex.Document do
           [delete_one_result]
         }
 
-  @type purge_one_result :: :ok | {:error, term()}
+  @type purge_one_result :: {:ok, doc_id} | {:error, term()}
 
   @type purge_results :: {
           :ok,
@@ -81,6 +88,7 @@ defmodule Barrex.Document do
   @doc """
   Get all document id's in a barrel.
   """
+  @spec ids(barrel) :: ids_results
   def ids(barrel) do
     Index.fold_docs(barrel, fn doc, acc -> {:ok, [doc["id"] | acc]} end, [], %{})
   end
@@ -118,6 +126,16 @@ defmodule Barrex.Document do
 
       {:error, reason} ->
         {:error, reason}
+    end
+  end
+
+  @doc """
+  Lookup all the documents in a `barrel`.
+  """
+  @spec fetch_all(barrel, fetch_opts) :: fetch_results
+  def fetch_all(barrel, opts \\ %{}) do
+    with {:ok, doc_ids} <- ids(barrel) do
+      fetch(barrel, doc_ids, opts)
     end
   end
 
@@ -170,11 +188,11 @@ defmodule Barrex.Document do
       {:ok, doc_id, rev_id} ->
         {:ok, doc_id, rev_id}
 
-      {:error, doc_error} ->
-        {:error, doc_error}
-
       {:error, :db_not_found} ->
         {:error, doc_id, :db_not_found}
+
+      {:error, doc_error} ->
+        {:error, doc_error}
     end
   end
 

@@ -1,4 +1,4 @@
-defmodule Barrex.DatabaseInfo do
+defmodule Barrel.DatabaseInfo do
   use GenServer
 
   ### CLIENT API

@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :barrex, key: :value
+#     config :barrel_ex, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:barrex, :key)
+#     Application.get_env(:barrel_ex, :key)
 #
 # You can also configure a 3rd-party app:
 #

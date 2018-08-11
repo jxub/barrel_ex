@@ -1,7 +1,7 @@
-defmodule BarrexDatabaseTest do
+defmodule BarrelDatabaseTest do
   use ExUnit.Case
 
-  alias Barrex.{
+  alias Barrel.{
     Database,
     Database.Info
   }
@@ -75,7 +75,7 @@ defmodule BarrexDatabaseTest do
       other ->
         raise other
     end
-  end 
+  end
 
   test "get information about a not found database", dbs do
     Database.delete(dbs.db)
@@ -86,6 +86,31 @@ defmodule BarrexDatabaseTest do
 
       other ->
         raise other
+    end
+  end
+
+  test "check if an existing database exists", dbs do
+    Database.delete(dbs.db)
+    Database.create(dbs.db)
+
+    case Database.exists?(dbs.db) do
+      true ->
+        :ok
+
+      false ->
+        raise "Database.exists?/1 works improperly"
+    end
+  end
+
+  test "check if an inexisting database exists", dbs do
+    Database.delete(dbs.db)
+
+    case Database.exists?(dbs.db) do
+      true ->
+        raise "Database.exists?/1 works improperly"
+
+      false ->
+        :ok
     end
   end
 

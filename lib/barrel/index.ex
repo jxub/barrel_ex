@@ -1,8 +1,9 @@
-defmodule Barrex.Index do
+defmodule Barrel.Index do
   @moduledoc """
   Provides facilities for working with indexes.
+  Used mostly internally.
 
-  TODO: reorganise into:
+  Possibly reorganise into:
 
   Documents.fold/4
   Changes.fold/5
@@ -14,25 +15,26 @@ defmodule Barrex.Index do
   @type path :: String.t()
 
   @type fold_docs_opts :: %{
-    include_deleted: boolean(),
-    history: boolean(),
-    max_history: integer() # hexadecimal
-  }
+          include_deleted: boolean(),
+          history: boolean(),
+          # hexadecimal
+          max_history: integer()
+        }
 
   @type fold_changes_opts :: %{
-    include_doc: boolean,
-    with_history: boolean
-  }
+          include_doc: boolean,
+          with_history: boolean
+        }
 
   @type fold_path_opts :: %{
-    include_deleted: boolean(),
-    history: boolean(),
-    max_history: integer() # hex
-  }
+          include_deleted: boolean(),
+          history: boolean(),
+          # hex
+          max_history: integer()
+        }
 
   @doc """
   Fold the barrel documents.
-  TODO: check return spec
   """
   @spec fold_docs(barrel, fun, any, fold_docs_opts) :: {atom, list}
   def fold_docs(barrel, fun, acc, opts) do
