@@ -4,7 +4,10 @@ defmodule Barrel.Document do
   creation, deletion, updates...
   """
 
-  alias Barrel.Index
+  alias Barrel.{
+    Cursor,
+    Index
+  }
 
   @type barrel :: String.t()
 
@@ -137,6 +140,20 @@ defmodule Barrel.Document do
     with {:ok, doc_ids} <- ids(barrel) do
       fetch(barrel, doc_ids, opts)
     end
+  end
+
+  @doc """
+  Fetch documents by `query` in a `barrel` applying
+  the projection `proj` to show only certain fields
+  and passing other options `opts` such as `:limit`.
+
+  This is the most flexible function in the module
+  as well as the main difference with the Erlang API of 
+  barrel.
+  """
+  @spec fetch(barrel, map, map, Keyword.t()) :: Enumerable.t()
+  def fetch(barrel, query, proj, opts) do
+    %Cursor{barrel: barrel, query: query, proj: proj, opts: opts}
   end
 
   @doc """

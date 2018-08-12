@@ -39,7 +39,7 @@ defmodule BarrelDocumentTest do
     Database.create(dbname)
 
     with docs <- Stream.repeatedly(&make_sample_doc/0) |> Enum.take(doc_num) do
-      with {:ok, reps} <- Document.save(dbname, docs) do
+      with {:ok, resps} <- Document.save(dbname, docs) do
         for resp <- resps do
           case resp do
             {:ok, doc_id, rev_id} ->
@@ -75,7 +75,7 @@ defmodule BarrelDocumentTest do
     Database.create(dbname)
 
     with doc <- %{:id => 12345, :key => :value},
-         {:ok, doc_id, rev_id} <- Document.save_one(barrel, doc),
+         {:ok, doc_id, rev_id} <- Document.save_one(dbname, doc),
          doc_ids <- [doc_id],
          {:ok, results} <- Document.fetch(dbname, doc_ids) do
       for res <- results do
@@ -92,7 +92,7 @@ defmodule BarrelDocumentTest do
       end
     end
 
-    with ids <- Document.ids(dbname) do
+    with {:ok, ids} <- Document.ids(dbname) do
       case length(ids) do
         1 ->
           :ok
@@ -100,6 +100,21 @@ defmodule BarrelDocumentTest do
         2 ->
           raise "more ids in database than expected (maybe some internal docs)"
       end
+    end
+  end
+
+  test "check if fetch/5 works properly with cursor", %{dbname: dbname} do
+    Database.delete(dbname)
+    Database.create(dbname)
+
+    doc = %{:num => 12345, :key => :value}
+    Document.save_one(dbname, doc)
+
+    with cursor <- Document.fetch(dbname, %{:num => 12345}, %{:key => false}, %{}) do
+      [doc] = cursor |> Enum.to_list()
+      assert Map.has_key?(doc, :key) == false
+      assert Map.has_key?(doc, :num) == true
+      assert doc.num == 12345
     end
   end
 

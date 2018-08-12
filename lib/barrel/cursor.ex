@@ -30,7 +30,7 @@ defmodule Barrel.Cursor do
   @type t :: %{
           barrel: barrel,
           query: %{optional(any()) => any()},
-          proj: %{optional(any()) => boolean() | integer()},
+          proj: %{optional(atom()) => boolean() | integer()},
           opts: %{optional(atom()) => any()}
         }
 
@@ -83,14 +83,14 @@ defmodule Barrel.Cursor do
             # get all document id's if no id's supplied
             case Document.ids(barrel) do
               {:ok, ids} ->
-                state(ids: ids, limit: limit) |> IO.inspect
+                state(ids: ids, limit: limit) |> IO.inspect()
 
               {:error, reason} ->
                 raise reason
             end
 
           id_or_ids ->
-            state(ids: id_or_ids, limit: limit) |> IO.inspect
+            state(ids: id_or_ids, limit: limit) |> IO.inspect()
         end
       end
     end
@@ -126,19 +126,18 @@ defmodule Barrel.Cursor do
           {:halt, state}
 
         state(ids: ids, limit: limit) = state ->
-          with {id, new_ids} <- ids |> List.pop_at(0),
-               _ <- state(state, ids: new_ids) do
+          with {id, new_ids} <- ids |> List.pop_at(0) |> IO.inspect() do
             case Document.fetch_one(barrel, id) do
               {:ok, doc} ->
                 case satisfies_query(doc, query) do
                   true ->
                     with projected_doc <- satisfies_proj(doc, proj) do
-                      {[projected_doc], state(state, limit: update_limit(limit))}
+                      {[projected_doc], state(state, ids: new_ids, limit: update_limit(limit))}
                     end
 
                   false ->
                     with empty_doc <- Map.new() do
-                      {[empty_doc], state(state, limit: update_limit(limit))}
+                      {[empty_doc], state(state, ids: new_ids, limit: update_limit(limit))}
                     end
                 end
 
@@ -153,7 +152,21 @@ defmodule Barrel.Cursor do
     end
 
     @doc """
-    If there is no limit set, do not decrement it.
+    Removes all the fields from `doc` which are represented by a
+    falsey (0 or false) value in projection.
+    """
+    defp satisfies_proj(doc, proj) do
+      with falsey <- Enum.reject(proj, fn {k, v} -> is_truthy(k, v) end),
+           not_projected <- falsey |> Enum.into(%{}) |> Map.keys() do
+        doc
+        |> Map.drop(not_projected)
+      end
+    end
+
+    @doc """
+    If there is no limit set, do not decrement it,
+    effectively creating a potentially very large loop over
+    all the id's in the database in the worst case.
     """
     defp update_limit(limit) do
       case limit do
@@ -167,12 +180,9 @@ defmodule Barrel.Cursor do
     close it here.
     """
     defp after_fun(_) do
-      fn
-        state(state) ->
-          :ok
-        res ->
-          IO.inspect(res)
-          :ok
+      fn _ ->
+        # IO.inspect(res)
+        :ok
       end
     end
 
@@ -180,12 +190,15 @@ defmodule Barrel.Cursor do
     defp satisfies_query(doc, nil), do: true
 
     @spec satisfies_query(map, map) :: boolean()
+    defp satisfies_query(doc, query) when query == %{}, do: true
+
+    @spec satisfies_query(map, map) :: boolean()
     defp satisfies_query(doc, query) do
       with query_keys <- Map.keys(query),
-           # all doc keys that are affected by query keys
-           doc_keys <- Map.take(doc, query_keys) do
-        for k <- doc_keys do
-          if doc_keys[k] != query_keys[k] do
+           doc_affected <- Map.take(doc, query_keys),
+           doc_keys <- Map.keys(doc_affected) do
+        for dk <- doc_keys do
+          if doc_affected[dk] != query[dk] do
             # TODO: add more rule-matching queries with $gt and $lt,...
             # at the moment, only equality is supported
             false
@@ -196,39 +209,23 @@ defmodule Barrel.Cursor do
       true
     end
 
-    @spec get_projection(map()) :: list()
-    defp get_projection(projection_map) do
-      with all_keys_list <- Enum.filter(projection_map, fn {k, v} -> is_truthy(k, v) end),
-           projectables <- Enum.reject(all_keys_list, &is_nil/1) do
-        projectables
-      end
-    end
-
-    @spec satisfies_proj(map(), map()) :: map()
-    defp satisfies_proj(doc, projection) do
-      with projectables <- get_projection(projection),
-           final_doc <- doc |> Map.take(projectables) do
-        final_doc
-      end
-    end
-
-    @spec is_truthy(any, any) :: any
-    defp is_truthy(k, v) do
+    @spec is_truthy(any, any) :: boolean()
+    def is_truthy(k, v) do
       case v do
         1 ->
-          k
+          true
 
         true ->
-          k
+          true
 
         0 ->
-          nil
+          false
 
         false ->
-          nil
+          false
 
         other ->
-          raise "invalid projection value: #{other}"
+          raise "invalid projection value, must be 0/1/true/false, is: #{other}"
       end
     end
 
