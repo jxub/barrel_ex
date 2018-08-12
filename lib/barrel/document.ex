@@ -150,8 +150,11 @@ defmodule Barrel.Document do
   This is the most flexible function in the module
   as well as the main difference with the Erlang API of 
   barrel.
+
+  Look in the `Barrel.Cursor` module for more information
+  about each one of the parameters.
   """
-  @spec fetch(barrel, map, map, Keyword.t()) :: Enumerable.t()
+  @spec fetch(barrel, map, map, map) :: Enumerable.t()
   def fetch(barrel, query, proj, opts) do
     %Cursor{barrel: barrel, query: query, proj: proj, opts: opts}
   end
