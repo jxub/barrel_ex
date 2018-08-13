@@ -1,0 +1,12 @@
+image: elixir:latest
+
+before_script:
+  - apt-get update -y
+  - mix local.rebar --force
+  - mix local.hex --force
+  - mix deps.get
+  - mix fix
+
+test:
+  script:
+  - mix testas
