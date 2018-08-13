@@ -20,7 +20,11 @@ To use the latest version, paste the following line in mix.exs deps:
 {:barrel_ex,  git: "https://gitlab.com/barrel-db/Clients/barrel_ex", branch: "develop"}
 ```
 
-And use at wish.
+Then, you'll need to fix a package version error, by running in `barrel_ex` directory:
+
+```shell
+$ mix fix
+```
 
 When it'll be [available in Hex](https://hex.pm/docs/publish) which is shortly, the package will be possible to instal
 by adding `barrel_ex` to your list of dependencies in `mix.exs`:
