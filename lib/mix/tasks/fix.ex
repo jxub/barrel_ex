@@ -12,8 +12,8 @@ defmodule Mix.Tasks.Fix do
   """
 
   def run(_args) do
-    Mix.shell.cmd(~s(rm -r ./_build/))
-    Mix.shell.cmd(~s(sed -i "s/1.2.0/2.0.1/g" ./deps/hooks/mix.exs))
-    Mix.shell.cmd(~s(mix compile))
+    Mix.shell().cmd(~s(rm -r ./_build/))
+    Mix.shell().cmd(~s(sed -i "s/1.2.0/2.0.1/g" ./deps/hooks/mix.exs))
+    Mix.shell().cmd(~s(mix compile))
   end
 end
