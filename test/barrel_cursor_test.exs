@@ -16,7 +16,7 @@ defmodule BarrelCursorTest do
     Database.delete(dbs.db)
     Database.create(dbs.db)
 
-    with c <- %Cursor{barrel: dbs.db, query: %{}, proj: %{}, opts: %{}} do
+    with _c <- %Cursor{barrel: dbs.db, query: %{}, proj: %{}, opts: %{}} do
       assert :ok == Protocol.assert_impl!(Enumerable, Barrel.Cursor)
     end
   end
@@ -25,11 +25,11 @@ defmodule BarrelCursorTest do
     Database.delete(dbs.db)
     Database.create(dbs.db)
 
-    {:ok, doc_id, rev_id} = Document.save_one(dbs.db, %{:a => 1, :b => 2})
-    {:ok, doc_id1, rev_id1} = Document.save_one(dbs.db, %{:c => 2, :d => 4})
+    {:ok, doc_id, _rev_id} = Document.save_one(dbs.db, %{:a => 1, :b => 2})
+    {:ok, doc_id1, _rev_id1} = Document.save_one(dbs.db, %{:c => 2, :d => 4})
 
     with query <- %{"ids" => [doc_id, doc_id1]},
-         doc_keys <- [:a, :b, "_rev", "id"],
+         _doc_keys <- [:a, :b, "_rev", "id"],
          c <- %Cursor{barrel: dbs.db, query: query, proj: %{}, opts: %{}},
          results <- c |> Enum.to_list() do
       assert length(results) == 2

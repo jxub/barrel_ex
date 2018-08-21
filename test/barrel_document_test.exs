@@ -42,7 +42,7 @@ defmodule BarrelDocumentTest do
       with {:ok, resps} <- Document.save(dbname, docs) do
         for resp <- resps do
           case resp do
-            {:ok, doc_id, rev_id} ->
+            {:ok, _doc_id, _rev_id} ->
               :ok
 
             {:error, :db_not_found} ->
@@ -58,7 +58,7 @@ defmodule BarrelDocumentTest do
     case Document.fetch_all(dbname) do
       {:ok, docs} ->
         case length(docs) do
-          doc_num ->
+          doc_num when is_integer(doc_num) ->
             :ok
 
           _ ->
@@ -75,7 +75,7 @@ defmodule BarrelDocumentTest do
     Database.create(dbname)
 
     with doc <- %{:id => 12345, :key => :value},
-         {:ok, doc_id, rev_id} <- Document.save_one(dbname, doc),
+         {:ok, doc_id, _rev_id} <- Document.save_one(dbname, doc),
          doc_ids <- [doc_id],
          {:ok, results} <- Document.fetch(dbname, doc_ids) do
       for res <- results do

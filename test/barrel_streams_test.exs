@@ -27,7 +27,7 @@ defmodule BarrelStreamsTest do
     :timer.sleep(200)
 
     receive do
-      {:changes, stream, changes, last_seq} ->
+      {:changes, _stream, changes, last_seq} ->
         # IO.inspect({:changes, stream, changes, last_seq})
         # Pattern matching with assert fails on complex maps,
         # so just do a raw `=`.
