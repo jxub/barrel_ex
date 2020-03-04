@@ -1,6 +1,6 @@
 # Barrex
 
-**TODO: Add description**
+BarrelDB Elixir client
 
 ## Installation
 
